@@ -1,12 +1,5 @@
 const routers = [
   {
-    path:'/login',
-    meta: {
-        title: '登陆'
-    },
-    component: (resolve) => require(['./views/login/login.vue'], resolve)
-  },
-  {
     path: '/',
     meta: {
         title: 'DServer人工智能服务器平台'
@@ -23,14 +16,6 @@ const routers = [
         },
         component: (resolve) => require(['./views/main/main.vue'], resolve)
       }
-      // {
-      //   path: 'deviceLog/:id/:name',
-      //   name:'deviceLog',
-      //   meta: {
-      //       title: '设备报警记录'
-      //   },
-      //   component: (resolve) => require(['./views/map/DeviceLog.vue'], resolve)
-      // },
         ]}
 
 ];
