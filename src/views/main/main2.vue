@@ -56,6 +56,7 @@
             margin: 20px auto 0;
             font-family: "微软雅黑";
             background: #fff;
+            min-width: 1000px;
         }
 
     }
@@ -86,7 +87,7 @@
         }
     }
 
-    #peitb thead {
+    #peitb thead, #tips-list1 thead, #tips-list2 thead {
         color: #fff;
         background: #000;
         font-size: 1.1em;
@@ -124,10 +125,6 @@
     /*商品列表 和 结账 上边距*/
 
     .notic#peitb,
-    .settle {
-        border-top: 2px solid crimson;
-    }
-
     .notice {
         border: 2px solid #FFF;
     }
@@ -151,12 +148,6 @@
         font-size: 1.6em;
     }
 
-    /*结账模块的外边距底部*/
-
-    .settle {
-        margin-bottom: 70px;
-    }
-
     /*结账按钮外边距*/
 
     .btnaccounts {
@@ -166,17 +157,18 @@
     #peitb tbody td {
         width: 12.5%;
         text-align: center;
-        &:nth-child(3){
+        &:nth-child(3) {
             width: 8%;
         }
-        &:nth-child(4),&:nth-child(5),&:nth-child(6){
+        &:nth-child(4), &:nth-child(5), &:nth-child(6) {
             width: 10.5%;
         }
-        &:nth-child(1),&:nth-child(2),&:nth-child(8) {
+        &:nth-child(1), &:nth-child(2), &:nth-child(8) {
             width: 16%;
         }
 
     }
+
     #peitb tbody td a {
         display: inline-block;
         margin-bottom: 5px;
@@ -196,12 +188,20 @@
         }
     }
 
+    .gdimg {
+        height: 60px;
+        line-height: 60px;
+        img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
 </style>
 <template lang="html">
     <div class="map">
 
         <div id="map">
-            <Tabs type="card">
+            <Tabs type="card" @on-click="tabsclick">
                 <TabPane label="快速配置">
                     <table id="peitb" class="table table-bordered">
                         <thead>
@@ -212,35 +212,45 @@
                         <tbody>
                         <tr>
                             <td class="text-center" v-for="(items,index) in hData" :key="items.id">
-                                <ul :id=index v-if="index<4"  :key="items.id">
-                                    <li v-for="item in items.configurations"
-                                        :key="item.id">
-                                        <p><a href="#" :id="item.id" @click="checkChange(item,$event)">
-                                            {{item.name}}</a></p>
-                                    </li>
+                                <div v-if="index<4">
 
-                                </ul>
-                                <ul :id=index v-else-if="index<7">
-                                    <li v-for="item in items.configurations"
-                                        :key="item.id">
-                                        <p><a href="#" :id="item.id" @click="checkChange2(item,$event)">
-                                            {{item.name}}</a></p>
-                                    </li>
 
-                                </ul>
-                                <ul :id=index v-else>
-                                    <li v-for="(item,index) in items.configurations"
-                                        :key="item.id">
-                                        <p><a href="#" :index=index :id="item.id" @click="checkChange3(item,$event)">
-                                            {{item.name}}</a></p>
-                                    </li>
+                                    <ul :id=index :key="items.id">
+                                        <li v-for="item in items.configurations"
+                                            :key="item.id">
+                                            <p><a href="#" :id="item.id" @click="checkChange(item,index,$event)">
+                                                {{item.name}}</a></p>
+                                        </li>
 
-                                </ul>
+                                    </ul>
+                                </div>
+                                <div v-else-if="index>3 &&index<7">
+                                    <ul :id=index>
+                                        <li v-for="item in items.configurations"
+                                            :key="item.id">
+                                            <p><a href="#" :id="item.id" @click="checkChange2(item,index,$event)">
+                                                {{item.name}}</a></p>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div v-else>
+                                    <ul :id=index>
+                                        <li v-for="(item,index) in items.configurations"
+                                            :key="item.id">
+                                            <p><a href="#" :index=index :id="item.id"
+                                                  @click="checkChange3(item,index,$event)">
+                                                {{item.name}}</a></p>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    {{cheekarr}}
+                    <!--选中的-->
+                    <!--{{cheekarr}}-->
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
@@ -285,34 +295,13 @@
                         </tr>
                         </tbody>
                     </table>
-                    <!--结账模块-->
-                    <Form ref="formInline" label-position="right" :label-width="120" :model="formInline"
-                          :rules="ruleInline" inline v-show="formshow">
-                        <FormItem label="姓名" prop="submitterName">
-                            <Input type="text" v-model="formInline.submitterName" placeholder="请输入你的姓名">
-                            <Icon type="person" slot="prepend"></Icon>
-                            </Input>
-                        </FormItem>
-                        <FormItem label="单位" prop="submitterCompa">
-                            <Input type="text" v-model="formInline.submitterCompa" placeholder="请输入你的单位">
-                            <Icon type="android-pin" slot="prepend"></Icon>
-                            </Input>
-                        </FormItem>
-                        <FormItem label="手机号码" prop="submitterTel">
-                            <Input type="text" :maxlength="11" v-model="formInline.submitterTel"
-                                   placeholder="请输入你的手机号码">
-                            <Icon type="android-call" slot="prepend"></Icon>
-                            </Input>
-                        </FormItem>
-                        <FormItem>
-                            <Button size="large" type="primary" @click="handleSubmit('formInline')">提交此选配单</Button>
-                        </FormItem>
-                    </Form>
-                    <div class="row clearfix settle text-right">
+
+                    <div class="row clearfix  text-right">
 
                         <div class="col-sm-12">
 
-                            <Button type="primary" size="large" v-show="!formshow" @click="formshow = true">选择此配置单
+                            <Button type="primary" size="large" v-show="!formshow&&this.cheekarr.length>0"
+                                    @click="formshow = true">选择此配置单
                             </Button>
                             <span class="accounts">合计：</span>
                             <Button type="error" size="large"> {{total_price|formatMoney}}</Button>
@@ -320,8 +309,163 @@
                     </div>
 
                 </TabPane>
-            </Tabs>
+                <TabPane label="推荐配置">
+                    <div id="tips">
+                        <h4 style="color:#649ac9">推荐配置</h4>
+                        <table id="tips-list1" class="table table-bordered text-center">
+                            <thead>
+                            <tr class="text-center">
+                                <td v-for="items in hData" :key="items.id">{{items.name}}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr id="tips-list1-bd">
+                                <td class="list">
+                                    <p class="gdimg">
+                                        <img class="img-responsive" src="http://ds.cstor.cn/img/GPU_52.png" alt=""></p>
+                                    <p class="info gdimg1 info1">Nvidia Titan X</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/CPU_61.png" alt="">
+                                </p>
+                                    <p class="info info2">Intel Dual E5-2620 v4</p></td>
+                                <td class="list"><p class="gdimg"><img width="80" class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/memory.png" alt="">
+                                </p>
+                                    <p class="info info3">64G</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/storage.png" alt="">
+                                </p>
+                                    <p class="info info4">SSD 150G</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/dataDisk.png" alt="">
+                                </p>
 
+                                    <p class="info info5 gdimg5">SAS 600G：2块</p></td>
+
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/xitong-img.png"
+                                                                       alt=""></p>
+                                    <p class="info info6">7046GR-TR</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/application1.png"
+                                                                       alt=""></p>
+                                    <p class="info info7"><span>Caffe</span></p></td>
+
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/simpledata1.png"
+                                                                       alt="">
+                                </p>
+                                    <p class="info info8"><span>500万车牌图片</span></p>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <table style="position: relative;top:-21px" id="tips-list1-btn" class="table table-bordered">
+                            <tbody>
+                            <tr class="tdfooter">
+                                <td style="border: none;" colspan="4" class="text-left"><p
+                                        style="margin:5px;color:#d4a27a;">经济型</p></td>
+                                <td style="border: none;" colspan="3" class="text-right">
+                                    <Button type="primary" size="large" v-show="!formshow" @click="formshow = true">
+                                        选择此配置单
+                                    </Button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table id="tips-list2" class="table table-bordered text-center">
+                            <thead>
+                            <tr class="text-center">
+                                <td v-for="items in hData" :key="items.id">{{items.name}}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr id="tips-list2-bd">
+                                <td class="list">
+                                    <p class="gdimg">
+                                        <img class="img-responsive" src="http://ds.cstor.cn/img/GPU_58.png" alt=""></p>
+                                    <p class="info gdimg1 info1">Nvida Tesla P100</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/CPU_61.png" alt="">
+                                </p>
+                                    <p class="info info2">Intel Dual E5-2620 v4</p></td>
+                                <td class="list"><p class="gdimg"><img width="80" class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/memory.png" alt="">
+                                </p>
+                                    <p class="info info3">128G</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/storage.png" alt="">
+                                </p>
+                                    <p class="info info4">SSD 240G</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/dataDisk.png" alt="">
+                                </p>
+
+                                    <p class="info info5 gdimg5">SAS 1.2T:4块</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/xitong-img.png"
+                                                                       alt=""></p>
+                                    <p class="info info6">7046GR-TR</p></td>
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/application1.png"
+                                                                       alt=""></p>
+                                    <p class="info info7"><span>Caffe</span></p></td>
+
+                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                       src="http://ds.cstor.cn/img/simpledata1.png"
+                                                                       alt="">
+                                </p>
+                                    <p class="info info8"><span>500万车牌图片</span></p>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <table style="position: relative;top:-21px" id="tips-list2-btn" class="table table-bordered">
+                            <tbody>
+                            <tr class="tdfooter">
+                                <td style="border: none;" colspan="4" class="text-left"><p
+                                        style="margin:5px;color:#d4a27a;">标准型</p></td>
+                                <td style="border: none;" colspan="3" class="text-right">
+                                    <Button type="primary" size="large" v-show="!formshow" @click="formshow = true">
+                                        选择此配置单
+                                    </Button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </TabPane>
+            </Tabs>
+            <!--结账模块-->
+            <Form ref="formInline" style="margin-top: 15px;" label-position="right" :label-width="100"
+                  :model="formInline"
+                  :rules="ruleInline" inline v-show="formshow">
+                <FormItem label="姓名" prop="submitterName">
+                    <Input type="text" v-model="formInline.submitterName" placeholder="请输入你的姓名">
+                    <Icon type="person" slot="prepend"></Icon>
+                    </Input>
+                </FormItem>
+                <FormItem label="单位" prop="submitterCompa">
+                    <Input type="text" v-model="formInline.submitterCompa" placeholder="请输入你的单位">
+                    <Icon type="android-pin" slot="prepend"></Icon>
+                    </Input>
+                </FormItem>
+                <FormItem label="手机号码" prop="submitterTel">
+                    <Input type="text" :maxlength="11" v-model="formInline.submitterTel"
+                           placeholder="请输入你的手机号码">
+                    <Icon type="android-call" slot="prepend"></Icon>
+                    </Input>
+                </FormItem>
+                <FormItem>
+                    <Button size="large" type="primary" @click="handleSubmit('formInline')">提交此选配单</Button>
+                </FormItem>
+            </Form>
         </div>
         <Modal v-model="modal1"
                title="信息"
@@ -346,12 +490,11 @@
     import Qs from 'qs'
 
     export default {
-        name: 'map',
+        name: 'jq',
         data() {
             return {
                 hData: [],//初始所有
                 chosenarr: {},//所有二级
-                idarr: [],//被选中的id
                 cheekarr: [],//被选中的
                 total_price: 0,
                 formshow: false,
@@ -390,7 +533,7 @@
             init(data) {
                 this.hData = data;
                 var vm = this;
-                let length = 0
+                this.cheekarr = [];
                 data.forEach(function (val, index, arr) {
                     val.configurations.forEach(function (val2) {
                         vm.chosenarr[val2.id] = val2;
@@ -398,60 +541,86 @@
 
                 });
             },
-            checkChange(item, e) { //单选
-                this.cheekarr = [];
-                if (!$(e.srcElement).hasClass('active')) {
-                    $(e.srcElement).parents('ul').find('a').removeClass('active');
-                    $(e.srcElement).addClass('active');
-                    this.cheekarr.push(this.chosenarr[e.srcElement.id])
-                } else {
-                    $(e.srcElement).removeClass('active');
-                    // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
-                };
-
-            },
-            checkChange2(item, e) { //多选
-                this.cheekarr = [];
+            checkChange(item, index, e) { //单选
 
                 if (!$(e.srcElement).hasClass('active')) {
                     $(e.srcElement).parents('ul').find('a').removeClass('active');
                     $(e.srcElement).addClass('active');
-                    this.cheekarr.push(this.chosenarr[e.srcElement.id])
+
                 } else {
                     $(e.srcElement).removeClass('active');
-                    // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
-                };
 
-            },
-            checkChange3(item, e) { //单多选
-                this.cheekarr = [];
-                var ind=e.srcElement.getAttribute("index");
-                if(ind<3){
-                    if (!$(e.srcElement).hasClass('active')) {
-                        $(e.srcElement).parents('ul').find('a:lt(3)').removeClass('active');
-                        $(e.srcElement).toggleClass('active');
-                        this.cheekarr.push(this.chosenarr[e.srcElement.id])
-                    } else {
-                        $(e.srcElement).removeClass('active');
-                        // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
-                    };
-                }else {
-                    if (!$(e.srcElement).hasClass('active')) {
-                        $(e.srcElement).parents('ul').find('a:lt(3)').removeClass('active');
-                        $(e.srcElement).toggleClass('active');
-                        this.cheekarr.push(this.chosenarr[e.srcElement.id])
-                    } else {
-                        $(e.srcElement).removeClass('active');
-                        // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
-                    };
                 }
+                ;
+                var vm = this;
+                setTimeout(function () {
+                    var $a = $('#peitb a.active');
+                    vm.cheekarr=[];
+                    $a.map(function (index, item) {
+                        vm.cheekarr.unshift(vm.chosenarr[$(item).attr('id')])
+                    });
+                })
+
+            },
+            checkChange2(item, index, e) { //多选
+
+                if (!$(e.srcElement).hasClass('active')) {
+                    $(e.srcElement).toggleClass('active');
+
+                } else {
+                    $(e.srcElement).toggleClass('active');
+
+                }
+                ;
+                var vm = this;
+                setTimeout(function () {
+                    var $a = $('#peitb a.active');
+                    vm.cheekarr=[];
+                    $a.map(function (index, item) {
+                        vm.cheekarr.unshift(vm.chosenarr[$(item).attr('id')])
+                    });
+                })
+
+            },
+            checkChange3(item, index, e) { //单多选
+
+                var ind = e.srcElement.getAttribute("index");
+                if (ind < 3) {
+                    if (!$(e.srcElement).hasClass('active')) {
+                        $(e.srcElement).parents('ul').find('a:lt(3)').removeClass('active');
+                        $(e.srcElement).toggleClass('active');
+
+                    } else {
+                        $(e.srcElement).removeClass('active');
+
+                    }
+                    ;
+                } else {
+                    if (!$(e.srcElement).hasClass('active')) {
+                        $(e.srcElement).parents('ul').find('a:lt(2)').removeClass('active');
+                        $(e.srcElement).toggleClass('active');
+
+                    } else {
+                        $(e.srcElement).removeClass('active');
+
+                    }
+                    ;
+                }
+                ;
+                var vm = this;
+                setTimeout(function () {
+                    var $a = $('#peitb a.active');
+                    vm.cheekarr=[];
+                    $a.map(function (index, item) {
+                        vm.cheekarr.unshift(vm.chosenarr[$(item).attr('id')])
+                    });
+                })
             },
             checkprefour() {
                 var pidarr = [];
                 this.cheekarr.forEach((item) => {
-                    pidarr.push(item.pid)
+                    pidarr.unshift(item.pid)
                 });
-                console.log(pidarr);
                 if (!pidarr.includes(1)) {
                     this.$Message.warning({
                         content: '你还没有选择GPU',
@@ -485,28 +654,8 @@
             numschange() {
                 this.totalPrice;
             },
-            //添加clss
-            addClass(obj, cls) {
-                let obj_class = obj.className; //获取 class 内容.
-                let blank = (obj_class != '') ? ' ' : ''; //判断获取到的 class 是否为空, 如果不为空在前面加个'空格'.
-                let added = obj_class + blank + cls; //组合原来的 class 和需要添加的 class.
-                let classArr = added.split(' ');
-                //class去重 不重复添加    解决：多个报警点切换  class添加多个  会出现报警样式不变的情况bug   ps:或者更改移除class 查找有没有多个  全部移除
-                let newClassArr = [];
-                for (let i = 0; i < classArr.length; i++) {
-                    if (newClassArr.indexOf(classArr[i]) == -1) {
-                        newClassArr.push(classArr[i])
-                    }
-                }
-                obj.className = newClassArr.join(' '); //替换原来的 class.
-            },
-            //移除class
-            removeClass(obj, cls) {
-                let obj_class = ' ' + obj.className + ' '; //获取 class 内容, 并在首尾各加一个空格. ex) 'abc    bcd' -> ' abc    bcd '
-                obj_class = obj_class.replace(/(\s+)/gi, ' ') //将多余的空字符替换成一个空格. ex) ' abc    bcd ' -> ' abc bcd '
-                let removed = obj_class.replace(' ' + cls + ' ', ' '); //在原来的 class 替换掉首尾加了空格的 class. ex) ' abc bcd ' -> 'bcd '
-                removed = removed.replace(/(^\s+)|(\s+$)/g, ''); //去掉首尾空格. ex) 'bcd ' -> 'bcd'
-                obj.className = removed; //替换原来的 class.
+            tabsclick() {
+                this.formshow = false;
             },
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
@@ -517,27 +666,50 @@
                             submitterTel: this.formInline.submitterTel,
                             submitterCompa: this.formInline.submitterTel,
                         };
-                        // this.axios({
-                        //     headers: {
-                        //         // 'token': JSON.parse(localStorage.getItem('userMes')).token
-                        //     },
-                        //     method: 'post',
-                        //     url: 'order/saveOrder',
-                        //     data: Qs.stringify(reqData)
-                        // }).then(res => {
-                        //     let data = res.data
-                        //     if (data.resultFlag) {
-                        //         this.$Message.info('成功！！');
-                        //
-                        //     } else {
-                        //         this.$Message.error('失败！！' + data.message);
-                        //     }
-                        // }).catch((e) => {
-                        //     this.$Notice.error({
-                        //         title: '错误',
-                        //         desc: '提交服务出错',
-                        //     });
-                        // })
+                        console.log(reqData)
+                        var str35=',',str6='',str7='';
+                        this.cheekarr.forEach(value => {
+                            console.log(value.pid)
+                            if( value.pid==1){
+                                reqData.gpu=value.name
+                            }else if( value.pid==2){
+                                reqData.cpu=value.name
+                            }else if( value.pid==3){
+                                reqData.memory=value.name
+                            }else if( value.pid==4){
+                                reqData.storage=value.name
+                            }else if( value.pid==5){
+                                reqData.system=value.name
+                            }else if( value.pid==35){
+                                reqData.dataDisk= (str35+=value.name+',')
+                            }else if( value.pid==6){
+                                reqData.application=(str6+=value.name+',')
+                            }else if( value.pid==7){
+                                reqData.simpledata=(str7+=value.name+',')
+                            }
+                        });
+
+                        this.axios({
+                            headers: {
+                                // 'token': JSON.parse(localStorage.getItem('userMes')).token
+                            },
+                            method: 'post',
+                            url: 'order/saveOrder',
+                            data: Qs.stringify(reqData)
+                        }).then(res => {
+                            let data = res.data
+                            if (data.resultFlag) {
+                                this.$Message.info('成功！！');
+
+                            } else {
+                                this.$Message.error('失败！！' + data.message);
+                            }
+                        }).catch((e) => {
+                            this.$Notice.error({
+                                title: '错误',
+                                desc: '提交服务出错',
+                            });
+                        })
                     } else {
                         this.$Message.error('Fail!');
                     }

@@ -272,6 +272,7 @@
                     </div>
 
                 </TabPane>
+
             </Tabs>
 
         </div>
@@ -298,7 +299,7 @@
     import Qs from 'qs'
 
     export default {
-        name: 'map',
+        name: 'vue',
         data() {
             return {
                 hData: [],//初始所有

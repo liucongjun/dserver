@@ -3,6 +3,7 @@
         height: 100%;
         font-family: "微软雅黑";
         background: rgb(244, 245, 247);
+        min-width: 1000px;
         .mainHeader {
             position: fixed;
             top: 0;
@@ -10,6 +11,7 @@
             width: 100%;
             color: #fff;
             background: #30383e;
+            min-width: 1000px;
             &.ivu-row {
                 .ivu-col {
                     height: 60px !important;
@@ -113,6 +115,7 @@
             top: 60px;
             bottom: 0;
             width: 100%;
+            min-width: 1000px;
         }
     }
 </style>
@@ -128,7 +131,7 @@
             <Col :sm="{ span:12}" :md="{ span:12}" :lg="{ span:11}">
             <Menu class="mainNav" mode="horizontal" theme="primary" active-name="1">
                 <Menu-item name="1">
-                    <router-link to="/map" active-class="router-link-exact-active">人工智能服务器 </router-link>
+                    <router-link to="/jq" active-class="router-link-exact-active">人工智能服务器 </router-link>
                 </Menu-item>
                 <Menu-item name="2">
                     <a href="http://www.cstor.cn/proTextdetail_11007.html">大数据实验一体机</a>

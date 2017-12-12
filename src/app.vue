@@ -24,6 +24,7 @@ html {
     width: 100%;
    font-family: "微软雅黑";
    background: rgb(244, 245, 247);
+  min-width: 1000px;
 }
 .ivu-notice{
   top: 90px!important;
@@ -45,6 +46,7 @@ html {
 .mainPage{
   width:100%;
   height:100%;
+  min-width: 1000px;
 }
 .ivu-message {
     z-index: 10000000000!important;
