@@ -117,13 +117,13 @@
     }
 
     .projectname,
-    .noticelist {
+    .notic#peitb {
         margin-bottom: 70px;
     }
 
     /*商品列表 和 结账 上边距*/
 
-    .noticelist,
+    .notic#peitb,
     .settle {
         border-top: 2px solid crimson;
     }
@@ -163,6 +163,39 @@
         margin-bottom: 1em;
     }
 
+    #peitb tbody td {
+        width: 12.5%;
+        text-align: center;
+        &:nth-child(3){
+            width: 8%;
+        }
+        &:nth-child(4),&:nth-child(5),&:nth-child(6){
+            width: 10.5%;
+        }
+        &:nth-child(1),&:nth-child(2),&:nth-child(8) {
+            width: 16%;
+        }
+
+    }
+    #peitb tbody td a {
+        display: inline-block;
+        margin-bottom: 5px;
+        white-space: nowrap;
+        color: #000;
+        text-decoration: none;
+    }
+
+    #peitb tbody a.active {
+        border: 1px solid #3aa5fc;
+        background: #e0fdff;
+        color: #84abd1;
+        &:after {
+            content: url(http://ds.cstor.cn/img/choosen1.png);
+            position: relative;
+            bottom: -5px;
+        }
+    }
+
 </style>
 <template lang="html">
     <div class="map">
@@ -178,21 +211,36 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="text-left" v-for="(items,index) in hData" :key="items.id"
-                                style="padding-left: 20px">
-                                <CheckboxGroup v-model="idarr" vertical v-for="item in items.configurations"
-                                               :key="item.id" @on-change="checkChange">
-                                    <Checkbox
-                                            :label=item.id>
-                                        <span>{{item.name}}</span>
-                                    </Checkbox>
+                            <td class="text-center" v-for="(items,index) in hData" :key="items.id">
+                                <ul :id=index v-if="index<4"  :key="items.id">
+                                    <li v-for="item in items.configurations"
+                                        :key="item.id">
+                                        <p><a href="#" :id="item.id" @click="checkChange(item,$event)">
+                                            {{item.name}}</a></p>
+                                    </li>
 
-                                </CheckboxGroup>
+                                </ul>
+                                <ul :id=index v-else-if="index<7">
+                                    <li v-for="item in items.configurations"
+                                        :key="item.id">
+                                        <p><a href="#" :id="item.id" @click="checkChange2(item,$event)">
+                                            {{item.name}}</a></p>
+                                    </li>
+
+                                </ul>
+                                <ul :id=index v-else>
+                                    <li v-for="(item,index) in items.configurations"
+                                        :key="item.id">
+                                        <p><a href="#" :index=index :id="item.id" @click="checkChange3(item,$event)">
+                                            {{item.name}}</a></p>
+                                    </li>
+
+                                </ul>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <!--{{cheekarr}}-->
+                    {{cheekarr}}
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
@@ -277,7 +325,7 @@
         </div>
         <Modal v-model="modal1"
                title="信息"
-              >
+        >
             <div style="text-align:center;font-size: 16px;">
                 <p style="">
                     <Icon type="checkmark-circled" :size="20" color="green"></Icon>
@@ -350,12 +398,53 @@
 
                 });
             },
-            checkChange(val) {
+            checkChange(item, e) { //单选
                 this.cheekarr = [];
-                val.map((item) => {
-                    this.cheekarr.push(this.chosenarr[item])
-                })
-                this.totalPrice;
+                if (!$(e.srcElement).hasClass('active')) {
+                    $(e.srcElement).parents('ul').find('a').removeClass('active');
+                    $(e.srcElement).addClass('active');
+                    this.cheekarr.push(this.chosenarr[e.srcElement.id])
+                } else {
+                    $(e.srcElement).removeClass('active');
+                    // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
+                };
+
+            },
+            checkChange2(item, e) { //多选
+                this.cheekarr = [];
+
+                if (!$(e.srcElement).hasClass('active')) {
+                    $(e.srcElement).parents('ul').find('a').removeClass('active');
+                    $(e.srcElement).addClass('active');
+                    this.cheekarr.push(this.chosenarr[e.srcElement.id])
+                } else {
+                    $(e.srcElement).removeClass('active');
+                    // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
+                };
+
+            },
+            checkChange3(item, e) { //单多选
+                this.cheekarr = [];
+                var ind=e.srcElement.getAttribute("index");
+                if(ind<3){
+                    if (!$(e.srcElement).hasClass('active')) {
+                        $(e.srcElement).parents('ul').find('a:lt(3)').removeClass('active');
+                        $(e.srcElement).toggleClass('active');
+                        this.cheekarr.push(this.chosenarr[e.srcElement.id])
+                    } else {
+                        $(e.srcElement).removeClass('active');
+                        // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
+                    };
+                }else {
+                    if (!$(e.srcElement).hasClass('active')) {
+                        $(e.srcElement).parents('ul').find('a:lt(3)').removeClass('active');
+                        $(e.srcElement).toggleClass('active');
+                        this.cheekarr.push(this.chosenarr[e.srcElement.id])
+                    } else {
+                        $(e.srcElement).removeClass('active');
+                        // this.cheekarr.pop(this.chosenarr[e.srcElement.id])
+                    };
+                }
             },
             checkprefour() {
                 var pidarr = [];
@@ -395,6 +484,29 @@
             },
             numschange() {
                 this.totalPrice;
+            },
+            //添加clss
+            addClass(obj, cls) {
+                let obj_class = obj.className; //获取 class 内容.
+                let blank = (obj_class != '') ? ' ' : ''; //判断获取到的 class 是否为空, 如果不为空在前面加个'空格'.
+                let added = obj_class + blank + cls; //组合原来的 class 和需要添加的 class.
+                let classArr = added.split(' ');
+                //class去重 不重复添加    解决：多个报警点切换  class添加多个  会出现报警样式不变的情况bug   ps:或者更改移除class 查找有没有多个  全部移除
+                let newClassArr = [];
+                for (let i = 0; i < classArr.length; i++) {
+                    if (newClassArr.indexOf(classArr[i]) == -1) {
+                        newClassArr.push(classArr[i])
+                    }
+                }
+                obj.className = newClassArr.join(' '); //替换原来的 class.
+            },
+            //移除class
+            removeClass(obj, cls) {
+                let obj_class = ' ' + obj.className + ' '; //获取 class 内容, 并在首尾各加一个空格. ex) 'abc    bcd' -> ' abc    bcd '
+                obj_class = obj_class.replace(/(\s+)/gi, ' ') //将多余的空字符替换成一个空格. ex) ' abc    bcd ' -> ' abc bcd '
+                let removed = obj_class.replace(' ' + cls + ' ', ' '); //在原来的 class 替换掉首尾加了空格的 class. ex) ' abc bcd ' -> 'bcd '
+                removed = removed.replace(/(^\s+)|(\s+$)/g, ''); //去掉首尾空格. ex) 'bcd ' -> 'bcd'
+                obj.className = removed; //替换原来的 class.
             },
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
@@ -441,7 +553,7 @@
                     this.total_price += item.type * item.num;
 
                 })
-            }
+            },
         }
         ,
         mounted() {

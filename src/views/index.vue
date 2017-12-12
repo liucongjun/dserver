@@ -95,6 +95,7 @@
                         line-height: 60px;
                         color: #fff;
                         font-size: 18px;
+                        text-decoration: none;
                         img {
                             position: absolute;
                             display: inline-block;
