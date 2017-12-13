@@ -4,7 +4,7 @@ const routers = [
     meta: {
         title: 'DServer人工智能服务器平台'
     },
-    redirect: '/jq',
+    redirect: '/search',
     component: (resolve) => require(['./views/index.vue'], resolve),
     children:[
 
@@ -22,6 +22,13 @@ const routers = [
             title: 'GPU服务器配置'
         },
         component: (resolve) => require(['./views/main/main2.vue'], resolve)
+      }, {
+        path: 'search',
+        name:'search',
+        meta: {
+            title: 'GPU服务器配置查询'
+        },
+        component: (resolve) => require(['./views/main/search.vue'], resolve)
       }
         ]}
 

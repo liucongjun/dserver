@@ -213,15 +213,12 @@
                         <tr>
                             <td class="text-center" v-for="(items,index) in hData" :key="items.id">
                                 <div v-if="index<4">
-
-
                                     <ul :id=index :key="items.id">
                                         <li v-for="item in items.configurations"
                                             :key="item.id">
                                             <p><a href="#" :id="item.id" @click="checkChange(item,index,$event)">
                                                 {{item.name}}</a></p>
                                         </li>
-
                                     </ul>
                                 </div>
                                 <div v-else-if="index>3 &&index<7">
