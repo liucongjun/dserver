@@ -51,7 +51,7 @@
 
         width: 100%;
         #map {
-            width: 70% !important;
+           width: 1200px !important;
             overflow: hidden;
             margin: 20px auto 0;
             font-family: "微软雅黑";
@@ -156,16 +156,25 @@
     }
 
     #peitb tbody td {
-        width: 12.5%;
         text-align: center;
+        margin: 0;
         &:nth-child(3) {
-            width: 8%;
+            width: 7%;
         }
-        &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+        &:nth-child(6) {
+            width: 11.5%;
+        }
+        &:nth-child(8), &:nth-child(4)   {
             width: 10.5%;
         }
-        &:nth-child(1), &:nth-child(2), &:nth-child(8) {
-            width: 16%;
+        &:nth-child(1), &:nth-child(7) {
+            width: 14.5%;
+        }
+        &:nth-child(5){
+            width: 15%;
+        }
+        &:nth-child(2){
+            width: 16.5%;
         }
 
     }

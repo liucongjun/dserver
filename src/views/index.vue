@@ -3,7 +3,7 @@
         height: 100%;
         font-family: "微软雅黑";
         background: rgb(244, 245, 247);
-        min-width: 1000px;
+       min-width: 1200px !important;
         .mainHeader {
             position: fixed;
             top: 0;
@@ -11,7 +11,7 @@
             width: 100%;
             color: #fff;
             background: #30383e;
-            min-width: 1000px;
+            min-width: 1200px !important;
             &.ivu-row {
                 .ivu-col {
                     height: 60px !important;
@@ -115,7 +115,7 @@
             top: 60px;
             bottom: 0;
             width: 100%;
-            min-width: 1000px;
+            min-width: 1200px !important;
         }
     }
 </style>
