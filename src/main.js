@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import iView from 'iview';
+import Vuex from 'vuex'
 import VueRouter from 'vue-router';
 import Routers from './router';
 
@@ -13,6 +14,19 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 Vue.prototype.axios=axios;
 Vue.use(VueRouter);
 Vue.use(iView);
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+    state: {
+        goodsarr:[] //所有商品
+    },
+    mutations: {
+        // increment (state) {
+        //     state.goodsarr
+        // }
+    }
+
+})
 
 // 路由配置
 const RouterConfig = {
@@ -40,7 +54,8 @@ router.afterEach(() => {
 
 new Vue({
     el: '#app',
-    router: router,
+    router,
+    store,
     render: h => h(App)
 });
 

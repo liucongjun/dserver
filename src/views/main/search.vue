@@ -88,7 +88,6 @@
     }
 
     .deviceList {
-        width: 75%;
         margin: 0 auto;
 
         .deviceCon {
@@ -97,15 +96,16 @@
                 margin: 20px 0;
                 text-align: center;
             }
-            .ivu-table-tbody{
-                .operate{
-                    .ivu-table-cell{
-                        padding:0;
+            .ivu-table-tbody {
+                .operate {
+                    .ivu-table-cell {
+                        padding: 0;
                     }
                 }
             }
         }
     }
+
     .search {
         width: 75%;
         margin: 0 auto;
@@ -116,6 +116,7 @@
             }
         }
     }
+
     .deviceMesModal {
 
         .ivu-modal-body {
@@ -147,12 +148,14 @@
             margin-bottom: 15px;
         }
     }
+
     .ivu-form.ivu-form-label-right.ivu-form-inline {
         margin-left: 30px;
         margin-top: 20px;
     }
-    .ivu-modal-confirm-footer{
-        margin-top: 20px!important;
+
+    .ivu-modal-confirm-footer {
+        margin-top: 20px !important;
     }
 </style>
 <template lang="html">
@@ -161,38 +164,41 @@
         <div id="map">
             <div id="wrapper">
                 <div class="scroll">
-            <Row class="search">
-                <Col span="18">
-                <Form ref="deviceQueryForm" :model="deviceQueryForm" inline>
-                    <FormItem prop="name">
-                        <Input type="text" v-model="deviceQueryForm.name" :maxlength="10" placeholder="请输入姓名查询">
-                        </Input>
-                    </FormItem>
-                    <FormItem prop="imsi">
-                        <Input type="text" v-model="deviceQueryForm.imsi"  placeholder="请输入单位查询">
-                        </Input>
-                    </FormItem>
+                    <Row class="search">
+                        <Col span="18">
+                        <Form ref="deviceQueryForm" :model="deviceQueryForm" inline>
+                            <FormItem prop="name">
+                                <Input type="text" v-model="deviceQueryForm.name" :maxlength="10" placeholder="请输入姓名查询">
+                                </Input>
+                            </FormItem>
+                            <FormItem prop="imsi">
+                                <Input type="text" v-model="deviceQueryForm.imsi" placeholder="请输入单位查询">
+                                </Input>
+                            </FormItem>
 
-                    <FormItem prop="address">
-                        <Input type="text" v-model="deviceQueryForm.address" :maxlength="11" placeholder="请输入手机号码查询">
-                        </Input>
-                    </FormItem>
-                    <FormItem>
-                        <Button type="primary" icon="search" @click="changePageNumber()">查询</Button>
-                        <Button type="error" icon="refresh" @click="resetQueryDevice()" >重置</Button>
-                        <Button type="success" icon="plus-round" @click="addDevice(true)">新增</Button>
-                    </FormItem>
-                </Form>
-                </Col>
-            </Row>
-            <Row class="deviceList">
-                <Col class="deviceCon" span="18">
-                <Table border :columns="column" :data="tableData"></Table>
-                <Page :total="total" placement="top" :page-size="pageSize" :current="pageNumber" @on-change="changePageNumber" @on-page-size-change="changePageSize" show-total show-sizer></Page>
-                </Col>
-            </Row>
-        </div>
-        </div>
+                            <FormItem prop="address">
+                                <Input type="text" v-model="deviceQueryForm.address" :maxlength="11"
+                                       placeholder="请输入手机号码查询">
+                                </Input>
+                            </FormItem>
+                            <FormItem>
+                                <Button type="primary" icon="search" @click="changePageNumber()">查询</Button>
+                                <Button type="error" icon="refresh" @click="resetQueryDevice()">重置</Button>
+                                <Button type="success" icon="plus-round" @click="addDevice(true)">新增</Button>
+                            </FormItem>
+                        </Form>
+                        </Col>
+                    </Row>
+                    <Row class="deviceList">
+                        <Col class="deviceCon">
+                        <Table border :columns="column" :data="tableData"></Table>
+                        <Page :total="total" placement="top" :page-size="pageSize" :current="pageNumber"
+                              @on-change="changePageNumber" @on-page-size-change="changePageSize" show-total
+                              show-sizer></Page>
+                        </Col>
+                    </Row>
+                </div>
+            </div>
         </div>
         <Modal v-model="deviceMesModal" :title="deviceMesTitle"
                @on-visible-change="deviceModalChange"
@@ -201,7 +207,8 @@
                 <div class="scroll">
                     <Form :model="deviceMesFrom" :label-width="80" ref="deviceMesFrom" :rules="deviceMesFromRule">
                         <FormItem label="设备号" prop="imsi">
-                            <Input v-model="deviceMesFrom.imsi" :readonly="deviceMesFrom.imsiStatus" :maxlength="20" placeholder="设备号"></Input>
+                            <Input v-model="deviceMesFrom.imsi" :readonly="deviceMesFrom.imsiStatus" :maxlength="20"
+                                   placeholder="设备号"></Input>
                         </FormItem>
                         <FormItem label="设备名称" prop="name">
                             <Input v-model="deviceMesFrom.name" :maxlength="20" placeholder="设备名称"></Input>
@@ -226,7 +233,8 @@
                         <FormItem>
                             <Row>
                                 <Col span="12">
-                                <Button type="dashed" long @click="addTels('ownerTels')" icon="plus-round">添加户主手机号</Button>
+                                <Button type="dashed" long @click="addTels('ownerTels')" icon="plus-round">添加户主手机号
+                                </Button>
                                 </Col>
                             </Row>
                         </FormItem>
@@ -251,7 +259,8 @@
                         <FormItem>
                             <Row>
                                 <Col span="12">
-                                <Button type="dashed" long @click="addTels('safetyTels')" icon="plus-round">添加安全员手机号</Button>
+                                <Button type="dashed" long @click="addTels('safetyTels')" icon="plus-round">添加安全员手机号
+                                </Button>
                                 </Col>
                             </Row>
                         </FormItem>
@@ -271,7 +280,8 @@
                             <Cascader :data="deviceMesFrom.addressData" v-model="deviceMesFrom.ads" transfer></Cascader>
                         </FormItem>
                         <FormItem label="详细地址" prop="adsDetail">
-                            <Input v-model="deviceMesFrom.adsDetail" :maxlength="80" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="详细地址......"></Input>
+                            <Input v-model="deviceMesFrom.adsDetail" :maxlength="80" type="textarea"
+                                   :autosize="{minRows: 2,maxRows: 5}" placeholder="详细地址......"></Input>
                         </FormItem>
                         <FormItem>
                             <Row :gutter="12">
@@ -279,8 +289,11 @@
                                 <Button type="info" @click="obtainLoLa()">获取经纬度</Button>
                                 </Col>
                                 <Col span="16">
-                                <div v-show="(LoLaMes=='0'?true:false)" class="ivu-form-item-error-tip" style="line-height:33px;">获取经纬度失败，请手动输入！！</div>
-                                <div v-show="deviceMesFrom.x&&deviceMesFrom.y&&(LoLaMes=='1'?true:false)" class="ivu-form-item-error-tip" style="line-height:33px;color:#19be6b;">获取经纬度成功！！</div>
+                                <div v-show="(LoLaMes=='0'?true:false)" class="ivu-form-item-error-tip"
+                                     style="line-height:33px;">获取经纬度失败，请手动输入！！</div>
+                                <div v-show="deviceMesFrom.x&&deviceMesFrom.y&&(LoLaMes=='1'?true:false)"
+                                     class="ivu-form-item-error-tip"
+                                     style="line-height:33px;color:#19be6b;">获取经纬度成功！！</div>
                                 </Col>
                             </Row>
                         </FormItem>
@@ -310,42 +323,53 @@
                 <Button type="primary" size="large" @click="deviceSubmit('deviceMesFrom')">确定</Button>
             </div>
         </Modal>
+        <Modal v-model="modallook"
+               title="详细配置">
+            <Table :columns="columnslook" :data="datalook"></Table>
+            <div slot="footer">
+            </div>
+        </Modal>
     </div>
 
 </template>
 
 <script>
     import Qs from 'qs'
-    import * as table from './data/tableseach'
+    import Util from '../../libs/util';
+    import {mapGetters} from 'vuex'
 
     export default {
         name: 'search',
 
         data() {
-            const statusSwit = (rule, value, callback) => {callback();}
-            const theCheck = (rule, value, callback) => {callback();}
+            const statusSwit = (rule, value, callback) => {
+                callback();
+            }
+            const theCheck = (rule, value, callback) => {
+                callback();
+            }
             const adsDetCas = (rule, value, callback) => {
-                if(value.length<=0){
+                if (value.length <= 0) {
                     callback(new Error('请选择地址'));
-                }else{
+                } else {
                     callback();
                 }
             }
             return {
 
-                tableData:table.data,
+                tableData: [],
                 pageNumber: 1, //当前页数
                 pageSize: 10, //页大小
                 total: 0,
-
-                deviceMesModal:true,
+                modallook: false,
+                deviceMesModal: false,
                 deviceMesTitle: '',
-                LoLaMes:'',
+                LoLaMes: '',
                 deviceMesModalScroll: null,
                 deviceMesFrom: {
-                    addMod:true,
-                    imsiStatus:true,
-                    id:'',
+                    addMod: true,
+                    imsiStatus: true,
+                    id: '',
                     name: '',
                     imsi: '',
                     the: '1',
@@ -354,13 +378,13 @@
                     adsDetail: '',
                     x: '',
                     y: '',
-                    ownerTelsDelBtnShow:false,
+                    ownerTelsDelBtnShow: false,
                     ownerTels: [{
                         value: '',
                         index: 1,
                         status: 1
                     }],
-                    safetyTelsDelBtnShow:false,
+                    safetyTelsDelBtnShow: false,
                     safetyTels: [{
                         value: '',
                         index: 1,
@@ -399,7 +423,7 @@
                         required: true,
                         // message: '请选择地址',
                         validator: adsDetCas,
-                        trigger:'change'
+                        trigger: 'change'
                     }],
                     adsDetail: [{
                         required: true,
@@ -420,8 +444,8 @@
                 deviceQueryForm: { //查询参数
                     name: '',
                     imsi: '',
-                    status:'',
-                    statusData:[{
+                    status: '',
+                    statusData: [{
                         value: '1',
                         label: '已发货'
                     },
@@ -442,93 +466,55 @@
                     },
                     {
                         title: '姓名',
-                        key: 'nickname',
-                        className:'userSelectText',
+                        key: 'submitterName',
+
                         align: 'center'
                     },
                     {
-                        title: '设备号',
-                        key: 'imsi',
-                        className:'userSelectText',
+                        title: '公司',
+                        key: 'submitterCompany',
+
                         align: 'center'
                     },
                     {
                         title: '手机号',
-                        key: 'yztels',
+                        key: 'submitterTel',
                         width: 210,
                         align: 'center',
-                        className:'userSelectText',
-                        render: (h, params) => {
-                            let data=params.row
-                            let owner=[];
-                            if (data.yztels.length>=1) {
-                                for (let i = 0; i < data.yztels.length; i++) {
-                                    owner.push(h('span', {
-                                        style: {
-                                            margin: '3px'
-                                        },
-                                    }, data.yztels[i]))
-                                    if ((i + 1) % 2 == 0) {
-                                        owner.push(h('br'))
-                                    }
-                                }
-                            }else{
-                                return '-'
-                            }
-                            return owner
-                        }
+
                     },
                     {
-                        title: '地址',
-                        key: 'address',
+                        title: '下单日期',
                         align: 'center',
-                        className:'userSelectText',
+                        key: 'submitDate',
                         render: (h, params) => {
-                            let data = params.row
-                            let addressDetail = ''
-                            // this.njAreaData.map((items) => {
-                            //     let address = ''
-                            //     if (data.aid == items.id) {
-                            //         address += '江苏省 南京市 ' + items.county;
-                            //         for (let j = 0; j < items.street.length; j++) {
-                            //             if (data.sid == items.street[j].id) {
-                            //                 address += ' ' + items.street[j].street;
-                            //                 addressDetail = address + ' ' + data.address
-                            //             }
-                            //         }
-                            //     }
-                            // })
-                            return addressDetail
-                        }
-                    },
-                    {
-                        title: '状态',
-                        key: 'type',
-                        align: 'center',
-                        render: (h, params) => {
-                            let data = params.row
-                            if (data.status == '0') {
-                                return h('span', {
-                                    style: {
-                                        color: '#ed3f14'
-                                    }
-                                }, '未发')
-                            } else if (data.status == '1'||!data.status) {
-                                return h('span', {
-                                    style: {
-                                        color: '#19be6b'
-                                    }
-                                }, '已发货')
-                            }
+                            // params.row.submitDate = 1513267200000;
+                            return h('div',
+                                Util.formatDate(new Date(params.row.submitDate), 'yyyy-MM-dd'))
+                            /*这里的this.row能够获取当前行的数据*/
                         }
                     },
                     {
                         title: '操作',
-                        width: 150,
-                        className:'operate',
+                        width: 250,
+                        className: 'operate',
                         align: 'center',
                         render: (h, params) => {
                             return [h('Button', {
+                                props: {
+                                    type: 'primary',
+                                    // size: 'small'
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+
+                                        this.look(params.row)
+                                    }
+                                }
+                            }, '查看'), h('Button', {
                                 props: {
                                     type: 'info',
                                     // size: 'small'
@@ -539,7 +525,7 @@
                                 on: {
                                     click: () => {
 
-                                        this.modDevice(params.row,false)
+                                        this.modDevice(params.row, false)
                                     }
                                 }
                             }, '修改'),
@@ -561,6 +547,46 @@
                         }
                     },
                 ],
+                columnslook: [
+                    {
+                        type: 'index',
+                        title: '序号',
+                        width: 80,
+                        align: 'center'
+                    },
+                    {
+                        title: '名称',
+                        key: 'configId',
+                        align: 'center',
+                        key: 'submitDate',
+                        render: (h, params) => {
+                            // params.row.submitDate = 1513267200000;
+                            return h('div',
+                                (params.row.configId))
+                            /*这里的this.row能够获取当前行的数据*/
+                        }
+                    },
+                    {
+                        title: '数量',
+                        key: 'count',
+
+                        align: 'center'
+                    },
+                    {
+                        title: '总价',
+                        key: 'totalPrice',
+                        align: 'center',
+
+                    }, {
+                        title: '其他信息',
+                        key: 'message',
+                        align: 'center',
+
+                    },
+
+                ],
+                datalook: [],
+
             }
         },
 
@@ -574,12 +600,10 @@
         },
         methods: {
             init(data) {
-                // data.forEach(function (val, index, arr) {
-                //     val.configurations.forEach(function (val2) {
-                //         vm.chosenarr[val2.id] = val2;
-                //     })
-                //
-                // });
+                console.log(data);
+                this.tableData = data.rows;
+                this.total = data.total;
+                // 为Date 对象添加Format方法
             },
             //重置查询
             resetQueryDevice() {
@@ -587,10 +611,14 @@
                 this.changePageNumber();
             },
             //获取经纬度
-            obtainLoLa(){
-                let adsStatus,adsDetStatus;
-                this.$refs['deviceMesFrom'].validateField('ads',(valid)=>{adsStatus=valid?false:true})
-                this.$refs['deviceMesFrom'].validateField('adsDetail',(valid)=>{adsDetStatus=valid?false:true})
+            obtainLoLa() {
+                let adsStatus, adsDetStatus;
+                this.$refs['deviceMesFrom'].validateField('ads', (valid) => {
+                    adsStatus = valid ? false : true
+                })
+                this.$refs['deviceMesFrom'].validateField('adsDetail', (valid) => {
+                    adsDetStatus = valid ? false : true
+                })
                 let addressDetail = ''
                 this.njAreaData.map((items) => {
                     let address = ''
@@ -603,7 +631,7 @@
                         }
                     }
                 })
-                if(adsStatus&&adsDetStatus){
+                if (adsStatus && adsDetStatus) {
                     this.axios({
                         method: 'get',
                         url: 'device/getxy',
@@ -611,18 +639,18 @@
                             address: this.deviceMesFrom.adsDetail,
                         }
                     }).then(res => {
-                        let data=res.data;
+                        let data = res.data;
                         // console.log(data)
-                        if(data.resultFlag){
-                            this.LoLaMes='1'
-                            this.deviceMesFrom.x=data.data.lng
-                            this.deviceMesFrom.y=data.data.lat
-                        }else{
-                            this.LoLaMes='0'
-                            this.deviceMesFrom.x='0'
-                            this.deviceMesFrom.y='0'
+                        if (data.resultFlag) {
+                            this.LoLaMes = '1'
+                            this.deviceMesFrom.x = data.data.lng
+                            this.deviceMesFrom.y = data.data.lat
+                        } else {
+                            this.LoLaMes = '0'
+                            this.deviceMesFrom.x = '0'
+                            this.deviceMesFrom.y = '0'
                         }
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             this.deviceMesModalScroll.refresh();
                         })
 
@@ -635,7 +663,7 @@
                 this.$refs[name].validate((valid) => {
                     if (valid) {
 
-                        let [ownerTels,safetyTels] = [[],[]]
+                        let [ownerTels, safetyTels] = [[], []]
                         this.deviceMesFrom.ownerTels.map((item) => {
                             if (item.status == '1') {
                                 ownerTels.push(item.value)
@@ -646,15 +674,15 @@
                                 safetyTels.push(item.value)
                             }
                         })
-                        let pathUrl=''
-                        let reqData=null
-                        if(this.deviceMesFrom.addMod){
-                            pathUrl='device/addDevice'
-                            reqData={
+                        let pathUrl = ''
+                        let reqData = null
+                        if (this.deviceMesFrom.addMod) {
+                            pathUrl = 'device/addDevice'
+                            reqData = {
                                 imsi: this.deviceMesFrom.imsi,
                                 nickname: this.deviceMesFrom.name,
                                 tels: ownerTels.join(','),
-                                aqytels:safetyTels.join(','),
+                                aqytels: safetyTels.join(','),
                                 aid: this.deviceMesFrom.ads[1],
                                 sid: this.deviceMesFrom.ads[2],
                                 type: this.deviceMesFrom.the,
@@ -663,13 +691,13 @@
                                 x: this.deviceMesFrom.x,
                                 y: this.deviceMesFrom.y
                             }
-                        }else{
-                            pathUrl='device/updateDevice'
-                            reqData={
+                        } else {
+                            pathUrl = 'device/updateDevice'
+                            reqData = {
                                 id: this.deviceMesFrom.id,
                                 nickname: this.deviceMesFrom.name,
                                 tels: ownerTels.join(','),
-                                aqytels:safetyTels.join(','),
+                                aqytels: safetyTels.join(','),
                                 aid: this.deviceMesFrom.ads[1],
                                 sid: this.deviceMesFrom.ads[2],
                                 type: this.deviceMesFrom.the,
@@ -687,17 +715,17 @@
                             url: pathUrl,
                             data: Qs.stringify(reqData)
                         }).then(res => {
-                            let data=res.data
-                            if(data.resultFlag){
+                            let data = res.data
+                            if (data.resultFlag) {
                                 this.$Message.info('成功！！');
                                 this.deviceMesModal = false;
-                                if(this.deviceMesFrom.addMod){
+                                if (this.deviceMesFrom.addMod) {
                                     this.changePageNumber()
-                                }else{
+                                } else {
                                     this.changePageNumber(this.pageNumber)
                                 }
-                            }else{
-                                this.$Message.error('失败！！'+data.message);
+                            } else {
+                                this.$Message.error('失败！！' + data.message);
                             }
                         }).catch((e) => {
                             this.$Notice.error({
@@ -705,68 +733,74 @@
                                 desc: '设备操作时服务出错',
                             });
                         })
-                    } else {}
+                    } else {
+                    }
                 })
             },
             //设备信息模态框 开关执行
-            deviceModalChange(status){
-                if(this.deviceMesFrom.addMod){
+            deviceModalChange(status) {
+                if (this.deviceMesFrom.addMod) {
                     this.$refs['deviceMesFrom'].resetFields();
-                    this.deviceMesFrom.ownerTels = [{ value: '', index: 1, status: 1 }]
-                    this.deviceMesFrom.safetyTels = [{ value: '', index: 1, status: 1 }]
-                }else{
-                    if(!status){
+                    this.deviceMesFrom.ownerTels = [{value: '', index: 1, status: 1}]
+                    this.deviceMesFrom.safetyTels = [{value: '', index: 1, status: 1}]
+                } else {
+                    if (!status) {
                         this.$refs['deviceMesFrom'].resetFields();
-                        this.deviceMesFrom.ownerTels = [{ value: '', index: 1, status: 1 }]
-                        this.deviceMesFrom.safetyTels = [{ value: '', index: 1, status: 1 }]
+                        this.deviceMesFrom.ownerTels = [{value: '', index: 1, status: 1}]
+                        this.deviceMesFrom.safetyTels = [{value: '', index: 1, status: 1}]
                     }
                 }
             },
             //新增设备按钮  执行
             addDevice(addMod) {
-                this.deviceMesFrom.addMod=addMod
-                this.deviceMesFrom.imsiStatus=false
+                this.deviceMesFrom.addMod = addMod
+                this.deviceMesFrom.imsiStatus = false
                 setTimeout(() => {
                     this.deviceMesModalScroll.refresh();
                 }, 100)
                 this.deviceMesTitle = "添加"
                 this.deviceMesModal = true
             },
+            //查看
+            look(data) {
+                this.datalook = data.orderJoList;
+                this.modallook = true;
+            },
             //修改设备按钮  执行
-            modDevice(data,addMod) {
-                this.deviceMesFrom.imsiStatus=true   //更改只读状态
-                this.deviceMesFrom.addMod=addMod      //更改 是新增 还是修改状态
+            modDevice(data, addMod) {
+                this.deviceMesFrom.imsiStatus = true   //更改只读状态
+                this.deviceMesFrom.addMod = addMod      //更改 是新增 还是修改状态
                 // console.log(data)
-                let ownerTelsArr=data.yztels
+                let ownerTelsArr = data.yztels
 
-                let safetyTelsArr=data.aqytels
+                let safetyTelsArr = data.aqytels
                 // ownerTels,safetyTels
-                let [ownerTels,safetyTels]=[[],[]]
-                for(let i=0;i<ownerTelsArr.length;i++){
+                let [ownerTels, safetyTels] = [[], []]
+                for (let i = 0; i < ownerTelsArr.length; i++) {
                     ownerTels.push({
-                        value:ownerTelsArr[i],
-                        index:i+1,
-                        status:'1'
+                        value: ownerTelsArr[i],
+                        index: i + 1,
+                        status: '1'
                     })
                 }
-                for(let i=0;i<safetyTelsArr.length;i++){
+                for (let i = 0; i < safetyTelsArr.length; i++) {
                     safetyTels.push({
-                        value:safetyTelsArr[i],
-                        index:i+1,
-                        status:'1'
+                        value: safetyTelsArr[i],
+                        index: i + 1,
+                        status: '1'
                     })
                 }
-                this.deviceMesFrom.id=data.id
-                this.deviceMesFrom.name=data.nickname
-                this.deviceMesFrom.imsi=data.imsi
-                this.deviceMesFrom.status=data.status?(data.status=='1'?true:false):true
-                this.deviceMesFrom.the=data.type
-                this.deviceMesFrom.ads=['nanjing',data.aid,data.sid]
-                this.deviceMesFrom.adsDetail=data.address
-                this.deviceMesFrom.x=data.x
-                this.deviceMesFrom.y=data.y
-                this.deviceMesFrom.ownerTels=ownerTels
-                this.deviceMesFrom.safetyTels=safetyTels
+                this.deviceMesFrom.id = data.id
+                this.deviceMesFrom.name = data.nickname
+                this.deviceMesFrom.imsi = data.imsi
+                this.deviceMesFrom.status = data.status ? (data.status == '1' ? true : false) : true
+                this.deviceMesFrom.the = data.type
+                this.deviceMesFrom.ads = ['nanjing', data.aid, data.sid]
+                this.deviceMesFrom.adsDetail = data.address
+                this.deviceMesFrom.x = data.x
+                this.deviceMesFrom.y = data.y
+                this.deviceMesFrom.ownerTels = ownerTels
+                this.deviceMesFrom.safetyTels = safetyTels
 
                 this.telDelShow('ownerTels')
                 this.telDelShow('safetyTels')
@@ -779,11 +813,11 @@
                 this.deviceMesModal = true
             },
             //删除设备
-            delDevice(data){
+            delDevice(data) {
                 this.$Modal.confirm({
                     title: '',
-                    content: '确认删除 <span style="color:#f00;">'+data.nickname+'</span> 号为 <span style="color:#f00;">'+data.imsi+'</span> 的配置？',
-                    class:"vertical-center-modal",
+                    content: '确认删除 <span style="color:#f00;">' + data.nickname + '</span> 号为 <span style="color:#f00;">' + data.imsi + '</span> 的配置？',
+                    class: "vertical-center-modal",
                     onOk: () => {
                         this.axios({
                             headers: {
@@ -796,12 +830,12 @@
                             }
                         }).then(res => {
                             // console.log(res)
-                            let data=res.data
-                            if(data.resultFlag){
+                            let data = res.data
+                            if (data.resultFlag) {
                                 this.$Message.info('成功！！');
                                 this.changePageNumber(this.pageNumber)
-                            }else{
-                                this.$Message.error('失败！！'+data.message);
+                            } else {
+                                this.$Message.error('失败！！' + data.message);
                             }
                         }).catch((e) => {
                             this.$Notice.error({
@@ -819,11 +853,11 @@
             addTels(ownerSafety) {
 
 
-                let length=this.deviceMesFrom[ownerSafety].length
+                let length = this.deviceMesFrom[ownerSafety].length
                 // console.log(length)
                 this.deviceMesFrom[ownerSafety].push({
                     value: '',
-                    index: length+1,
+                    index: length + 1,
                     status: 1
                 });
                 this.telDelShow(ownerSafety)
@@ -834,7 +868,7 @@
 
             },
             //删除手机号按钮 执行
-            removeTels(index,ownerSafety) {
+            removeTels(index, ownerSafety) {
                 this.deviceMesFrom[ownerSafety][index].status = 0;
                 setTimeout(() => {
                     this.deviceMesModalScroll.refresh();
@@ -843,7 +877,7 @@
                 // console.log(this.deviceMesFrom[ownerSafety])
             },
             //新增删除手机号时 判断删除手机号按钮显示与否
-            telDelShow(ownerSafety){
+            telDelShow(ownerSafety) {
                 let tel = []
                 for (let i = 0; i < this.deviceMesFrom[ownerSafety].length; i++) {
                     if (this.deviceMesFrom[ownerSafety][i].status == '1') {
@@ -853,9 +887,9 @@
                 // console.log(tel.length)
                 for (let i = 0; i < tel.length; i++) {
                     if (tel.length > 1) {
-                        this.deviceMesFrom[ownerSafety+'DelBtnShow'] = true;
+                        this.deviceMesFrom[ownerSafety + 'DelBtnShow'] = true;
                     } else {
-                        this.deviceMesFrom[ownerSafety+'DelBtnShow'] = false
+                        this.deviceMesFrom[ownerSafety + 'DelBtnShow'] = false
                     }
                 }
             },
@@ -886,17 +920,11 @@
             },
         },
         computed: {
-            // //结账 总金额的实时计算
-            // totalPrice: function () {
-            //     //IE浏览器 可能不支持箭头函数把 item=>改成function(item)就好。再加上 _this=this。
-            //     this.total_price = 0;
-            //     this.cheekarr.forEach(item => {
-            //         this.total_price += item.type * item.num;
-            //
-            //     })
-            // },
-        }
-        ,
+            ...mapGetters({
+                           // 映射 `this.doneCount` 为 `store.getters.doneTodosCount`
+                goodsarr
+                       })
+        },
         mounted() {
             this.deviceScroll = new IScroll('#wrapper', {
                 mouseWheel: true,
@@ -919,31 +947,34 @@
         }
         ,
         created() {
-            //表格数据
-            // new Promise((resolve) => {
-            //     this.axios.get('order/queryOrder', {
-            //         params: {}
-            //     })
-            //         .then(res => {
-            //             let data = res.data
-            //             if (data.resultFlag) {
-            //                 resolve(data.data)
-            //             } else {
-            //                 this.$Notice.error({
-            //                     title: '错误',
-            //                     desc: '获取数据时出错',
-            //                 });
-            //             }
-            //         }).catch((e) => {
-            //         this.$Notice.error({
-            //             title: '错误',
-            //             desc: '获取数据时服务出错',
-            //         });
-            //     })
-            // }).then((data) => {
-            //
-            //     this.init(data)
-            // })
+            // 表格数据
+            new Promise((resolve) => {
+                this.axios.get('MyOrder/queryOrder', {
+                    params: {
+                        pageSize: this.pageSize,
+                        pageNumber: this.pageNumber
+                    }
+                })
+                    .then(res => {
+                        let data = res.data
+                        if (data.resultFlag) {
+                            resolve(data.data)
+                        } else {
+                            this.$Notice.error({
+                                title: '错误',
+                                desc: '获取数据时出错',
+                            });
+                        }
+                    }).catch((e) => {
+                    this.$Notice.error({
+                        title: '错误',
+                        desc: '获取数据时服务出错',
+                    });
+                })
+            }).then((data) => {
+
+                this.init(data);
+            })
         }
     }
 </script>

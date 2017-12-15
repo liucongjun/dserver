@@ -609,10 +609,8 @@
 <script>
     import Qs from 'qs'
     import html2canvas from 'html2canvas';
-    import * as table from './data/peizhi'
-
     export default {
-        name: 'jq',
+        name: 'dServer',
         data() {
             return {
                 hData: [],//初始所有
@@ -686,6 +684,7 @@
         methods: {
             init(data) {
                 var data = data;
+                this.$store.state.goodsarr=data; //设置state
                 var vm = this;
                 this.chosenarr = [];
                 data.map((item) => {
