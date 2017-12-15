@@ -51,7 +51,7 @@
 
         width: 100%;
         #map {
-            width: 90%;
+            width: 70% !important;
             overflow: hidden;
             margin: 20px auto 0;
             font-family: "微软雅黑";
@@ -87,7 +87,7 @@
         }
     }
 
-    #peitb thead, #tips-list1 thead, #tips-list2 thead {
+    #peitb thead, #tips-list1 thead, #tips-list2 thead, #modalsumit-md thead {
         color: #fff;
         background: #000;
         font-size: 1.1em;
@@ -140,6 +140,7 @@
 
     .zongprice {
         color: #ff2a00;
+        margin-right: 50px;
     }
 
     /*结账 的字体大小*/
@@ -174,6 +175,7 @@
         margin-bottom: 5px;
         white-space: nowrap;
         color: #000;
+        font-size: 15px;
         text-decoration: none;
     }
 
@@ -196,13 +198,224 @@
             vertical-align: middle;
         }
     }
+
+    #quick > tr {
+        height: 150px;
+        line-height: 150px;
+        > td:first-child {
+            text-align: center;
+            width: 108px;
+            line-height: 24px;
+            color: #666;
+            font-size: 14px;
+        }
+    }
+
+    .ivu-radio-group-button .ivu-radio-wrapper .ivu-radio-group-item {
+        width: 200px;
+    }
+
+    #quicktab1 .ivu-tabs-tab {
+        border: 1px solid #dddee1;
+        width: 150px;
+        height: 50px;
+        text-align: center;
+        line-height: 31px;
+        .ivu-tabs-tab-active {
+            border: 1px solid #2d8cf0 !important;
+        }
+    }
+
+    #quicktab2 .ivu-tabs-tab {
+        border: 1px solid #dddee1;
+        width: 150px;
+        height: 50px;
+        text-align: center;
+        line-height: 31px;
+        .ivu-tabs-tab-active {
+            border: 1px solid #2d8cf0 !important;
+        }
+    }
 </style>
 <template lang="html">
     <div class="map">
 
         <div id="map">
-            <Tabs type="card" @on-click="tabsclick">
+            <Tabs id="headtab" type="card" @on-click="tabsclick">
                 <TabPane label="快速配置">
+                    <table id="quick" class="table table-bordered" style="padding-top: 50px;">
+                        <tr>
+                            <td>类型</td>
+                            <td>
+                                <Tabs id="quicktab1" name="经济型" v-model="quicktypebutton1">
+                                    <TabPane label="经济型" name="经济型">
+                                        <table id="tips-list1" class="table table-bordered text-center">
+                                            <thead>
+                                            <tr class="text-center">
+
+                                                <th>GPU</th>
+                                                <th>CPU</th>
+                                                <th>内存</th>
+                                                <th>系统盘</th>
+                                                <th>准系统</th>
+                                                <th>深度学习框架</th>
+                                                <th>样本数据</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr id="tips-list1-bd">
+                                                <td class="list">
+                                                    <p class="gdimg">
+                                                        <img class="img-responsive"
+                                                             src="http://ds.cstor.cn/img/GPU_52.png" alt=""></p>
+                                                    <p class="info gdimg1 info1">Nvidia Titan X</p></td>
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/CPU_61.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info2">Intel Dual E5-2620 v4</p></td>
+                                                <td class="list"><p class="gdimg"><img width="80"
+                                                                                       class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/memory.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info3">64G</p></td>
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/storage.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info4">SSD 150G</p></td>
+
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/xitong-img.png"
+                                                                                       alt=""></p>
+                                                    <p class="info info6">7046GR-TR</p></td>
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/application1.png"
+                                                                                       alt=""></p>
+                                                    <p class="info info7"><span>Caffe</span></p></td>
+
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/simpledata1.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info8"><span>500万车牌图片</span></p>
+                                                </td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </TabPane>
+                                    <TabPane label="标准型" name="标准型">
+                                        <table id="tips-list2" class="table table-bordered text-center">
+                                            <thead>
+                                            <tr class="text-center">
+                                                <th>GPU</th>
+                                                <th>CPU</th>
+                                                <th>内存</th>
+                                                <th>系统盘</th>
+                                                <th>准系统</th>
+                                                <th>深度学习框架</th>
+                                                <th>样本数据</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr id="tips-list2-bd">
+                                                <td class="list">
+                                                    <p class="gdimg">
+                                                        <img class="img-responsive"
+                                                             src="http://ds.cstor.cn/img/GPU_58.png" alt=""></p>
+                                                    <p class="info gdimg1 info1">Nvida Tesla P100</p></td>
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/CPU_61.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info2">Intel Dual E5-2620 v4</p></td>
+                                                <td class="list"><p class="gdimg"><img width="80"
+                                                                                       class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/memory.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info3">128G</p></td>
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/storage.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info4">SSD 240G</p></td>
+
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/xitong-img.png"
+                                                                                       alt=""></p>
+                                                    <p class="info info6">7046GR-TR</p></td>
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/application1.png"
+                                                                                       alt=""></p>
+                                                    <p class="info info7"><span>Caffe</span></p></td>
+
+                                                <td class="list"><p class="gdimg"><img class="img-responsive"
+                                                                                       src="http://ds.cstor.cn/img/simpledata1.png"
+                                                                                       alt="">
+                                                </p>
+                                                    <p class="info info8"><span>500万车牌图片</span></p>
+                                                </td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </TabPane>
+
+                                </Tabs>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>数据盘</td>
+                            <td>
+                                <Tabs id="quicktab2" name="SATA 4T" v-model="quicksispan1">
+                                    <TabPane label="SATA 4T" name="SATA 4T">
+
+                                    </TabPane>
+                                    <TabPane label="SATA 6T" name="SATA 6T">
+
+                                    </TabPane>
+                                    <TabPane label="SAS 600G" name="SAS 600G">
+
+                                    </TabPane>
+                                    <TabPane label="SAS 1.2T" name="SAS 1.2T">
+
+                                    </TabPane>
+                                    <TabPane label="SAS 4T" name="SAS 4T">
+                                    </TabPane>
+                                </Tabs>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>购买数量</td>
+                            <td>
+                                <InputNumber :min="1" v-model="quickcounts1" size="large" width="150"></InputNumber>
+                                套
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div id="tips">
+                        <div class="row clearfix  text-right" style="margin: 30px;">
+
+                            <div class="col-sm-12">
+                                <Button type="primary" size="large" v-show="!modalsumit"
+                                        @click="modelsumitshow(1)">选择此配置单
+                                </Button>
+                                <span class="accounts">合计：</span>
+                                <Button type="error" size="large"> {{total_price2|formatMoney}}</Button>
+                            </div>
+                        </div>
+                    </div>
+                </TabPane>
+                <TabPane label="自定义配置">
                     <table id="peitb" class="table table-bordered">
                         <thead>
                         <tr class="text-center">
@@ -211,59 +424,63 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="text-center" v-for="(items,index) in hData" :key="items.id">
-                                <div v-if="index<4">
-                                    <ul :id=index :key="items.id">
-                                        <li v-for="item in items.configurations"
-                                            :key="item.id">
-                                            <p><a href="#" :id="item.id" @click="checkChange(item,index,$event)">
+                            <td class="text-center" v-for="(n,indexs) in hData" :key="indexs">
+                                <div v-if="indexs<4">
+                                    <ul :id=indexs>
+                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
+                                            <p v-if="item.pid==indexs+1"><a href="#" :id="item.id" :index="item.index"
+                                                                            @click="checkChange(item,index,$event)">
                                                 {{item.name}}</a></p>
                                         </li>
                                     </ul>
                                 </div>
-                                <div v-else-if="index>3 &&index<7">
-                                    <ul :id=index>
-                                        <li v-for="item in items.configurations"
-                                            :key="item.id">
-                                            <p><a href="#" :id="item.id" @click="checkChange2(item,index,$event)">
+                                <div v-if="indexs==7">
+                                    <ul :id=indexs>
+                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
+                                            <p v-if="item.pid==35"><a href="#" :id="item.id" :index="item.index"
+                                                                      @click="checkChange2(item,index,$event)">
                                                 {{item.name}}</a></p>
                                         </li>
-
                                     </ul>
                                 </div>
-                                <div v-else>
-                                    <ul :id=index>
-                                        <li v-for="(item,index) in items.configurations"
-                                            :key="item.id">
-                                            <p><a href="#" :index=index :id="item.id"
-                                                  @click="checkChange3(item,index,$event)">
+                                <div v-if="indexs==4||indexs==5">
+                                    <ul :id=indexs>
+                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
+                                            <p v-if="item.pid==indexs+1"><a href="#" :id="item.id" :index="item.index"
+                                                                            @click="checkChange2(item,index,$event)">
                                                 {{item.name}}</a></p>
                                         </li>
-
+                                    </ul>
+                                </div>
+                                <div v-if="indexs==6">
+                                    <ul :id=indexs>
+                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
+                                            <p v-if="item.pid==indexs+1"><a href="#" :id="item.id" :index="item.index"
+                                                                            @click="checkChange3(item,index,$event)">
+                                                {{item.name}}</a></p>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <!--选中的-->
-                    <!--{{cheekarr}}-->
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered" id="tips-list0">
                         <thead>
                         <tr>
-                            <th>
+                            <th width="50">
                                 编号
                             </th>
                             <th>
                                 商品信息
                             </th>
-                            <th>
+                            <th width="150">
                                 商品单价
                             </th>
-                            <th>
+                            <th width="150">
                                 商品数量
                             </th>
-                            <th>
+                            <th width="350">
                                 总金额
                             </th>
                         </tr>
@@ -279,26 +496,24 @@
                         </span>
                             </td>
                             <td>
-                                {{item.type}}
+                                {{item.price | formatMoney}}
                             </td>
                             <td>
-                                <InputNumber v-model="item.num" :min="1" size="large"
-                                             @on-change="numschange"></InputNumber>
+                                <InputNumber v-model="item.count" :min="1" size="large"></InputNumber>
                             </td>
                             <td class="zongprice">
-                                {{item.type*item.num}}
+                                {{item.price*item.count | formatMoney}}
                             </td>
 
                         </tr>
                         </tbody>
                     </table>
 
-                    <div class="row clearfix  text-right">
+                    <div class="row clearfix  text-right" style="margin: 30px;">
 
                         <div class="col-sm-12">
-
-                            <Button type="primary" size="large" v-show="!formshow&&this.cheekarr.length>0"
-                                    @click="formshow = true">选择此配置单
+                            <Button type="primary" size="large" v-show="!modalsumit&&this.cheekarr.length>0"
+                                    @click="modelsumitshow(0)">选择此配置单
                             </Button>
                             <span class="accounts">合计：</span>
                             <Button type="error" size="large"> {{total_price|formatMoney}}</Button>
@@ -306,150 +521,44 @@
                     </div>
 
                 </TabPane>
-                <TabPane label="推荐配置">
-                    <div id="tips">
-                        <h4 style="color:#649ac9">推荐配置</h4>
-                        <table id="tips-list1" class="table table-bordered text-center">
-                            <thead>
-                            <tr class="text-center">
-                                <td v-for="items in hData" :key="items.id">{{items.name}}</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="tips-list1-bd">
-                                <td class="list">
-                                    <p class="gdimg">
-                                        <img class="img-responsive" src="http://ds.cstor.cn/img/GPU_52.png" alt=""></p>
-                                    <p class="info gdimg1 info1">Nvidia Titan X</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/CPU_61.png" alt="">
-                                </p>
-                                    <p class="info info2">Intel Dual E5-2620 v4</p></td>
-                                <td class="list"><p class="gdimg"><img width="80" class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/memory.png" alt="">
-                                </p>
-                                    <p class="info info3">64G</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/storage.png" alt="">
-                                </p>
-                                    <p class="info info4">SSD 150G</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/dataDisk.png" alt="">
-                                </p>
 
-                                    <p class="info info5 gdimg5">SAS 600G：2块</p></td>
-
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/xitong-img.png"
-                                                                       alt=""></p>
-                                    <p class="info info6">7046GR-TR</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/application1.png"
-                                                                       alt=""></p>
-                                    <p class="info info7"><span>Caffe</span></p></td>
-
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/simpledata1.png"
-                                                                       alt="">
-                                </p>
-                                    <p class="info info8"><span>500万车牌图片</span></p>
-                                </td>
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                        <table style="position: relative;top:-21px" id="tips-list1-btn" class="table table-bordered">
-                            <tbody>
-                            <tr class="tdfooter">
-                                <td style="border: none;" colspan="4" class="text-left"><p
-                                        style="margin:5px;color:#d4a27a;">经济型</p></td>
-                                <td style="border: none;" colspan="3" class="text-right">
-                                    <Button type="primary" size="large" v-show="!formshow" @click="formshow = true">
-                                        选择此配置单
-                                    </Button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <table id="tips-list2" class="table table-bordered text-center">
-                            <thead>
-                            <tr class="text-center">
-                                <td v-for="items in hData" :key="items.id">{{items.name}}</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="tips-list2-bd">
-                                <td class="list">
-                                    <p class="gdimg">
-                                        <img class="img-responsive" src="http://ds.cstor.cn/img/GPU_58.png" alt=""></p>
-                                    <p class="info gdimg1 info1">Nvida Tesla P100</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/CPU_61.png" alt="">
-                                </p>
-                                    <p class="info info2">Intel Dual E5-2620 v4</p></td>
-                                <td class="list"><p class="gdimg"><img width="80" class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/memory.png" alt="">
-                                </p>
-                                    <p class="info info3">128G</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/storage.png" alt="">
-                                </p>
-                                    <p class="info info4">SSD 240G</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/dataDisk.png" alt="">
-                                </p>
-
-                                    <p class="info info5 gdimg5">SAS 1.2T:4块</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/xitong-img.png"
-                                                                       alt=""></p>
-                                    <p class="info info6">7046GR-TR</p></td>
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/application1.png"
-                                                                       alt=""></p>
-                                    <p class="info info7"><span>Caffe</span></p></td>
-
-                                <td class="list"><p class="gdimg"><img class="img-responsive"
-                                                                       src="http://ds.cstor.cn/img/simpledata1.png"
-                                                                       alt="">
-                                </p>
-                                    <p class="info info8"><span>500万车牌图片</span></p>
-                                </td>
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                        <table style="position: relative;top:-21px" id="tips-list2-btn" class="table table-bordered">
-                            <tbody>
-                            <tr class="tdfooter">
-                                <td style="border: none;" colspan="4" class="text-left"><p
-                                        style="margin:5px;color:#d4a27a;">标准型</p></td>
-                                <td style="border: none;" colspan="3" class="text-right">
-                                    <Button type="primary" size="large" v-show="!formshow" @click="formshow = true">
-                                        选择此配置单
-                                    </Button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </TabPane>
             </Tabs>
+
+        </div>
+        <Modal v-model="modalsumit" ref="modalsumit"
+               :title="MesTitle" width="60%">
+
+            <Table v-if="orbtn===0" stripe :columns="columns1" :data="data1"></Table>
+            <div v-if="orbtn===1" id="quickbd">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <td>类型</td>
+                        <td>数据盘</td>
+                        <td>购买数量</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="quickbdtype">{{quicktypebutton1}}</td>
+                        <td id="quickbdpan">{{quicksispan1}}</td>
+                        <td>{{quickcounts1}}套</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
             <!--结账模块-->
-            <Form ref="formInline" style="margin-top: 15px;" label-position="right" :label-width="100"
+            <Form ref="formInline" style="margin-top: 15px;" label-position="right" :label-width="80"
                   :model="formInline"
-                  :rules="ruleInline" inline v-show="formshow">
+                  :rules="ruleInline" inline>
                 <FormItem label="姓名" prop="submitterName">
                     <Input type="text" v-model="formInline.submitterName" placeholder="请输入你的姓名">
                     <Icon type="person" slot="prepend"></Icon>
                     </Input>
                 </FormItem>
-                <FormItem label="单位" prop="submitterCompa">
-                    <Input type="text" v-model="formInline.submitterCompa" placeholder="请输入你的单位">
+                <FormItem label="单位" prop="submitterCompany">
+                    <Input type="text" v-model="formInline.submitterCompany" placeholder="请输入你的单位">
                     <Icon type="android-pin" slot="prepend"></Icon>
                     </Input>
                 </FormItem>
@@ -463,28 +572,35 @@
                     <Button size="large" type="primary" @click="handleSubmit('formInline')">提交此选配单</Button>
                 </FormItem>
             </Form>
-        </div>
-        <Modal v-model="modal1"
-               title="信息"
-        >
+            <div slot="footer">
+            </div>
+        </Modal>
+        <Modal v-model="modaldown"
+               title="联系我们" width="50%">
             <div style="text-align:center;font-size: 16px;">
                 <p style="">
                     <Icon type="checkmark-circled" :size="20" color="green"></Icon>
                     提交成功
                 </p>
                 <p>你也可以联系我们，对你的配置单作详细的解答</p>
-                <h3 style="color:#43a6f9;margin-bottom:40px;">400 8855360</h3>
+
+                <p><img src="../../img/phone.png" width="100%"></p>
                 <p><img src="http://ds.cstor.cn/img/pdf.png" height="50" width="40"></p>
 
-                <Button type="primary" size="large" id="down" href="#">下载你的配置单</Button>
+                <Button type="primary" size="large" @click="downpdf">下载你的配置单</Button>
+            </div>
+            <div slot="footer">
             </div>
         </Modal>
+
     </div>
 
 </template>
 
 <script>
     import Qs from 'qs'
+    import html2canvas from 'html2canvas';
+    import * as table from './data/peizhi'
 
     export default {
         name: 'jq',
@@ -493,19 +609,23 @@
                 hData: [],//初始所有
                 chosenarr: {},//所有二级
                 cheekarr: [],//被选中的
-                total_price: 0,
-                formshow: false,
-                modal1: false,
+                modaldown: false,
+                modalsumit: false,
+                quicktypebutton1: '经济型',
+                quickcounts1: 1,
+                quicksispan1: 'SATA 4T',
+                MesTitle: '',
+                orbtn: '', //自定义还是快速
                 formInline: {
                     submitterName: '',
                     submitterTel: '',
-                    submitterCompa: ''
+                    submitterCompany: ''
                 },
                 ruleInline: {
                     submitterName: [
                         {required: true, message: '请输入你的名字', trigger: 'blur'}
                     ],
-                    submitterCompa: [
+                    submitterCompany: [
                         {required: true, message: '请输入你的单位', trigger: 'blur'}
                     ],
                     submitterTel: [
@@ -521,22 +641,73 @@
                             }
                         }
                     ]
-                }
+                },
+                columns1: [
+                    {
+                        title: '序号',
+                        type: 'index',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '商品',
+                        // {{item.name}}【{{ item.pid | formatPid}}】
+                        key: 'name'
+                    },
+                    {
+                        title: '单价',
+                        key: 'price'
+                    },
+                    {
+                        title: '数量',
+                        key: 'count'
+                    },
+                    {
+                        title: '总价',
+                        render: (h, params) => {
+                            return "￥" + (params.row.price * params.row.count).toFixed(2)
+                        }
+                    }
+                ],
+                data1: []
             }
         },
 
         watch: {},
         methods: {
             init(data) {
-                this.hData = data;
+                var data = data;
                 var vm = this;
-                this.cheekarr = [];
-                data.forEach(function (val, index, arr) {
-                    val.configurations.forEach(function (val2) {
-                        vm.chosenarr[val2.id] = val2;
-                    })
-
+                this.chosenarr = [];
+                data.map((item) => {
+                    if (item.type == 1) {
+                        vm.hData.push(item)
+                    }
                 });
+                data.forEach((item) => {
+                    if (item.type == 2) {
+                        vm.chosenarr[item.id] = item;
+                    }
+                });
+
+            },
+            modelsumitshow(num) {
+                this.$refs['formInline'].resetFields();
+                if (num == 0) {
+                    this.orbtn = 0;
+                    var flag = this.checkprefour();
+                    if (flag) {
+                        this.data1 = this.cheekarr;
+                        this.MesTitle = '自定义配置单信息'
+                        this.modalsumit = true;
+                    }
+                } else if (num == 1) {
+                    this.orbtn = 1;
+                    this.MesTitle = '快速配置单信息'
+                    this.modalsumit = true;
+                }
+
+
             },
             checkChange(item, index, e) { //单选
 
@@ -552,11 +723,13 @@
                 var vm = this;
                 setTimeout(function () {
                     var $a = $('#peitb a.active');
-                    vm.cheekarr=[];
+                    vm.cheekarr = [];
                     $a.map(function (index, item) {
                         vm.cheekarr.unshift(vm.chosenarr[$(item).attr('id')])
                     });
-                })
+                    this.totalPrice;
+                });
+
 
             },
             checkChange2(item, index, e) { //多选
@@ -572,16 +745,20 @@
                 var vm = this;
                 setTimeout(function () {
                     var $a = $('#peitb a.active');
-                    vm.cheekarr=[];
+                    vm.cheekarr = [];
                     $a.map(function (index, item) {
                         vm.cheekarr.unshift(vm.chosenarr[$(item).attr('id')])
                     });
-                })
+
+
+                });
+
 
             },
             checkChange3(item, index, e) { //单多选
 
                 var ind = e.srcElement.getAttribute("index");
+                console.log(ind);
                 if (ind < 3) {
                     if (!$(e.srcElement).hasClass('active')) {
                         $(e.srcElement).parents('ul').find('a:lt(3)').removeClass('active');
@@ -594,8 +771,8 @@
                     ;
                 } else {
                     if (!$(e.srcElement).hasClass('active')) {
-                        $(e.srcElement).parents('ul').find('a:lt(2)').removeClass('active');
-                        $(e.srcElement).toggleClass('active');
+                        // $(e.srcElement).parents('ul').find('a:lt(2)').removeClass('active');
+                        $(e.srcElement).addClass('active');
 
                     } else {
                         $(e.srcElement).removeClass('active');
@@ -607,11 +784,11 @@
                 var vm = this;
                 setTimeout(function () {
                     var $a = $('#peitb a.active');
-                    vm.cheekarr=[];
+                    vm.cheekarr = [];
                     $a.map(function (index, item) {
                         vm.cheekarr.unshift(vm.chosenarr[$(item).attr('id')])
                     });
-                })
+                });
             },
             checkprefour() {
                 var pidarr = [];
@@ -625,6 +802,7 @@
                         top: 50,
                         closable: true
                     });
+                    return false;
                 } else if (!pidarr.includes(2)) {
                     this.$Message.warning({
                         content: '你还没有选择CPU',
@@ -632,6 +810,7 @@
                         top: 50,
                         closable: true
                     });
+                    return false;
                 } else if (!pidarr.includes(3)) {
                     this.$Message.warning({
                         content: '你还没有选择内存',
@@ -639,6 +818,7 @@
                         top: 50,
                         closable: true
                     });
+                    return false;
                 } else if (!pidarr.includes(4)) {
                     this.$Message.warning({
                         content: '你还没有选择系统盘',
@@ -646,83 +826,187 @@
                         top: 50,
                         closable: true
                     });
+                    return false;
+                } else {
+                    return true;
                 }
             },
-            numschange() {
-                this.totalPrice;
-            },
+
             tabsclick() {
-                this.formshow = false;
+                this.modalsumit = false;
             },
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.checkprefour();
                         var reqData = {
                             submitterName: this.formInline.submitterName,
                             submitterTel: this.formInline.submitterTel,
-                            submitterCompa: this.formInline.submitterTel,
+                            submitterCompany: this.formInline.submitterCompany,
                         };
-                        console.log(reqData)
-                        var str35=',',str6='',str7='';
-                        this.cheekarr.forEach(value => {
-                            console.log(value.pid)
-                            if( value.pid==1){
-                                reqData.gpu=value.name
-                            }else if( value.pid==2){
-                                reqData.cpu=value.name
-                            }else if( value.pid==3){
-                                reqData.memory=value.name
-                            }else if( value.pid==4){
-                                reqData.storage=value.name
-                            }else if( value.pid==5){
-                                reqData.system=value.name
-                            }else if( value.pid==35){
-                                reqData.dataDisk= (str35+=value.name+',')
-                            }else if( value.pid==6){
-                                reqData.application=(str6+=value.name+',')
-                            }else if( value.pid==7){
-                                reqData.simpledata=(str7+=value.name+',')
-                            }
-                        });
-
-                        this.axios({
-                            headers: {
-                                // 'token': JSON.parse(localStorage.getItem('userMes')).token
-                            },
-                            method: 'post',
-                            url: 'order/saveOrder',
-                            data: Qs.stringify(reqData)
-                        }).then(res => {
-                            let data = res.data
-                            if (data.resultFlag) {
-                                this.$Message.info('成功！！');
-
-                            } else {
-                                this.$Message.error('失败！！' + data.message);
-                            }
-                        }).catch((e) => {
-                            this.$Notice.error({
-                                title: '错误',
-                                desc: '提交服务出错',
+                        if (this.orbtn == 0) {
+                            var goodsInfostr = ''
+                            this.cheekarr.forEach(value => {
+                                goodsInfostr += value.id + ',' + value.count + ',' + (value.count * value.price).toFixed(2) + ';'
                             });
-                        })
+                            reqData.goodsInfo = goodsInfostr
+
+                            this.axios({
+                                headers: {
+                                    // 'token': JSON.parse(localStorage.getItem('userMes')).token
+                                },
+                                method: 'post',
+                                url: 'MyOrder/saveOrder',
+                                data: Qs.stringify(reqData)
+                            }).then(res => {
+                                let data = res.data
+                                if (data.resultFlag) {
+                                    this.$Message.info('提交表单成功');
+                                    this.modaldown = true;
+
+                                } else {
+                                    this.$Message.error('失败！！' + data.message);
+                                }
+                                ;
+                            }).catch((e) => {
+                                this.$Notice.error({
+                                    title: '错误',
+                                    desc: '提交服务出错',
+                                });
+                                this.$refs['formInline'].resetFields();
+                            })
+                        } else if (this.orbtn == 1) {
+                            var goodsInfostr = ''
+                            goodsInfostr += 26 + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                            reqData.goodsInfo = goodsInfostr
+                            this.axios({
+                                headers: {
+                                    // 'token': JSON.parse(localStorage.getItem('userMes')).token
+                                },
+                                method: 'post',
+                                url: 'MyOrder/saveOrder',
+                                data: Qs.stringify(reqData)
+                            }).then(res => {
+                                let data = res.data
+                                if (data.resultFlag) {
+                                    this.$Message.info('提交表单成功');
+                                    this.modaldown = true;
+
+                                } else {
+                                    this.$Message.error('失败！！' + data.message);
+                                }
+                                ;
+                            }).catch((e) => {
+                                this.$Notice.error({
+                                    title: '错误',
+                                    desc: '提交服务出错',
+                                });
+                                this.$refs['formInline'].resetFields();
+                            })
+                        }
+
                     } else {
                         this.$Message.error('Fail!');
                     }
                 })
+            },
+            downpdf() {
+                if (this.orbtn == 0) {
+                    var contentstr = '';
+                    var str6 = '';
+                    var str7 = '';
+                    var str35 = '';
+                    this.cheekarr.forEach(value => {
+                        if (value.pid == 1) {
+                            contentstr += 'GPU@' + value.name + ':' + value.count + ';'
+                        } else if (value.pid == 2) {
+                            contentstr += 'CPU@' + value.name + ':' + value.count + ';'
+                        } else if (value.pid == 3) {
+                            contentstr += '内存@' + value.name + ':' + value.count + ';'
+                        } else if (value.pid == 4) {
+                            contentstr += '系统盘@' + value.name + ':' + value.count + ';'
+                        } else if (value.pid == 5) {
+                            contentstr += '准系统@' + value.name + ':' + value.count + ';'
+                        } else if (value.pid == 6) {
+                            str6 += value.name + ':' + value.count + ','
+                        } else if (value.pid == 7) {
+                            str7 += value.name + ':' + value.count + ','
+                        } else if (value.pid == 35) {
+                            str35 += value.name + ':' + value.count + ','
+                        }
+
+                    });
+                    if (str6.length) {
+                        contentstr += '深度学习框架@' + str6.substring(0, str6.length - 1) + ';'
+                    }
+                    if (str35.length) {
+                        contentstr += '数据盘@' + str35.substring(0, str35.length - 1) + ';'
+                    }
+                    if (str7.length) {
+                        contentstr += '样本数据@' + str7.substring(0, str7.length - 1) + ';'
+                    }
+
+
+                    window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr)
+                } else if (this.orbtn == 1) {
+                    var contentstr = '';
+                    if (this.quicktypebutton1 == '经济型'){
+                        contentstr += 'GPU@Nvidia Titan X:' + this.quickcounts1 + ';'
+                        contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';'
+                        contentstr += '内存@64G:' + this.quickcounts1 + ';'
+                        contentstr += '系统盘@SSD 150G:' + this.quickcounts1 + ';'
+                        contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
+                        contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
+                        contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
+                        contentstr += '数据盘@' +this.quicksispan1+':'+ this.quickcounts1 + ';'
+                    }else  if(this.quicktypebutton1 == '标准型'){
+                        contentstr += 'GPU@Nvida Tesla P100:' + this.quickcounts1 + ';'
+                        contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';'
+                        contentstr += '内存@64G:' + this.quickcounts1 + ';'
+                        contentstr += '系统盘@SSD 150G:' + this.quickcounts1 + ';'
+                        contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
+                        contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
+                        contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
+                        contentstr += '数据盘@' +this.quicksispan1+':'+ this.quickcounts1 + ';'
+                    }
+                }
+                window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr)
             }
         },
         computed: {
             //结账 总金额的实时计算
-            totalPrice: function () {
+            total_price: function () {
                 //IE浏览器 可能不支持箭头函数把 item=>改成function(item)就好。再加上 _this=this。
-                this.total_price = 0;
+                let totalPrice = 0;
                 this.cheekarr.forEach(item => {
-                    this.total_price += item.type * item.num;
+                    totalPrice += item.price * item.count;
 
                 })
+                return totalPrice
             },
+            total_price2: function () {
+                let totalPrice2 = 0;
+                let btnprice = '';
+                if (this.quicktypebutton1 == '经济型') {
+                    btnprice = '51'
+                } else {
+                    btnprice = '72'
+                }
+                let panprice2 = '';
+                if (this.quicksispan1 == 'SATA 4T') {
+                    panprice2 = '22'
+                } else if (this.quicksispan1 == 'SATA 6T') {
+                    panprice2 = '33'
+                } else if (this.quicksispan1 == 'SAS 600G') {
+                    panprice2 = '44'
+                } else if (this.quicksispan1 == 'SAS 1.2T') {
+                    panprice2 = '55'
+                } else if (this.quicksispan1 == 'SAS 4T') {
+                    panprice2 = '66'
+                }
+                totalPrice2 = this.quickcounts1 * btnprice * panprice2 * 0;
+
+                return totalPrice2
+            }
         }
         ,
         mounted() {
@@ -765,9 +1049,9 @@
         }
         ,
         created() {
-            //表格数据
+            // 表格数据
             new Promise((resolve) => {
-                this.axios.get('configuration/queryByType', {
+                this.axios.get('Configure/listAllConfig', {
                     params: {}
                 })
                     .then(res => {

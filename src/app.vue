@@ -25,6 +25,7 @@ html {
    font-family: "微软雅黑";
    background: rgb(244, 245, 247);
   min-width: 1000px;
+  font-size: 14px;
 }
 .ivu-notice{
   top: 90px!important;

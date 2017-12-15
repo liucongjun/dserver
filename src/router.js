@@ -2,9 +2,9 @@ const routers = [
   {
     path: '/',
     meta: {
-        title: 'DServer人工智能服务器平台'
+        title: 'dServer人工智能服务器平台'
     },
-    redirect: '/search',
+    redirect: '/dServer',
     component: (resolve) => require(['./views/index.vue'], resolve),
     children:[
 
@@ -16,8 +16,8 @@ const routers = [
         },
         component: (resolve) => require(['./views/main/main.vue'], resolve)
       }, {
-        path: 'jq',
-        name:'jq',
+        path: 'dServer',
+        name:'dServer',
         meta: {
             title: 'GPU服务器配置'
         },

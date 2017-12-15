@@ -5,7 +5,7 @@ let util = {
 
 };
 util.title = function(title) {
-    title = title ? title + ' DServer人工智能服务器平台' : 'DServer人工智能服务器平台';
+    title = title ? title + ' dServer人工智能服务器平台' : 'dServer人工智能服务器平台';
     window.document.title = title;
 };
 

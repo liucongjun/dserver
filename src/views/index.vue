@@ -125,19 +125,19 @@
             <Col :sm="{ span:7}" :md="{ span:6}" :lg="{ span:6}">
             <div class="mainLogo">
                 <img src="http://ds.cstor.cn/img/head-title.png" alt="">
-                <span>DServer人工智能服务器</span>
+                <span>dServer人工智能服务器</span>
             </div>
             </Col>
             <Col :sm="{ span:12}" :md="{ span:12}" :lg="{ span:11}">
             <Menu class="mainNav" mode="horizontal" theme="primary" active-name="1">
                 <Menu-item name="1">
-                    <router-link to="/jq" active-class="router-link-exact-active">人工智能服务器 </router-link>
+                    <router-link to="/dServer" active-class="router-link-exact-active">人工智能服务器 </router-link>
                 </Menu-item>
                 <Menu-item name="2">
                     <a href="http://www.cstor.cn/proTextdetail_11007.html">大数据实验一体机</a>
                 </Menu-item>
                 <Menu-item name="3">
-                    <a href="#">人工智能实验平台</a>
+                    <a href="http://58.213.47.166:8998">人工智能实验平台</a>
                 </Menu-item>
             </Menu>
             </Col>
