@@ -286,7 +286,7 @@
                 </p>
                 <p>你也可以联系我们，对你的配置单作详细的解答</p>
                 <h3 style="color:#43a6f9;margin-bottom:40px;">400 8855360</h3>
-                <p><img src="http://ds.cstor.cn/img/pdf.png" height="50" width="40"></p>
+                <p><img src="http://ds.cstor.cn/Configure/image/download?fileName=xxx.jpg" height="50" width="40"></p>
 
                 <Button type="primary" size="large" id="down" href="#">下载你的配置单</Button>
             </div>

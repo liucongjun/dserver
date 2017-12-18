@@ -164,13 +164,13 @@
         &:nth-child(6) {
             width: 11.5%;
         }
-        &:nth-child(8), &:nth-child(4) {
+        &:nth-child(5), &:nth-child(4) {
             width: 10.5%;
         }
         &:nth-child(1), &:nth-child(7) {
             width: 14.5%;
         }
-        &:nth-child(5) {
+        &:nth-child(8) {
             width: 15%;
         }
         &:nth-child(2) {
@@ -425,10 +425,11 @@
                     </div>
                 </TabPane>
                 <TabPane label="自定义配置">
+
                     <table id="peitb" class="table table-bordered">
                         <thead>
                         <tr class="text-center">
-                            <td v-for="items in hData" :key="items.id">{{items.name}}</td>
+                            <td v-for="(items,index) in hData" :key="index">{{items.name}}</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -443,7 +444,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div v-if="indexs==7">
+                                <div v-if="indexs==4">
                                     <ul :id=indexs>
                                         <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
                                             <p v-if="item.pid==35"><a href="#" :id="item.id" :index="item.index"
@@ -452,28 +453,30 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div v-if="indexs==4||indexs==5">
+                                <div v-if="indexs==7">
                                     <ul :id=indexs>
                                         <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
-                                            <p v-if="item.pid==indexs+1"><a href="#" :id="item.id" :index="item.index"
-                                                                            @click="checkChange2(item,index,$event)">
+                                            <p v-if="item.pid==indexs"><a href="#" :id="item.id" :index="item.index"
+                                                                          @click="checkChange3(item,index,$event)">
                                                 {{item.name}}</a></p>
                                         </li>
                                     </ul>
                                 </div>
-                                <div v-if="indexs==6">
+                                <div v-if="indexs==5||indexs==6">
                                     <ul :id=indexs>
                                         <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
-                                            <p v-if="item.pid==indexs+1"><a href="#" :id="item.id" :index="item.index"
-                                                                            @click="checkChange3(item,index,$event)">
+                                            <p v-if="item.pid==indexs"><a href="#" :id="item.id" :index="item.index"
+                                                                          @click="checkChange2(item,index,$event)">
                                                 {{item.name}}</a></p>
                                         </li>
                                     </ul>
                                 </div>
+
                             </td>
                         </tr>
                         </tbody>
                     </table>
+                    <!--{{cheekarr}}-->
                     <table class="table table-hover table-bordered" id="tips-list0">
                         <thead>
                         <tr>
@@ -502,7 +505,7 @@
                             <td>
                                 <span>
                             <strong>{{item.name}}【{{ item.pid | formatPid}}】</strong>
-                        </span>
+                        </span><img height="50"  :src="'http://192.168.0.192:8082/gpumall/Configure/image/download?fileName='+item.imgPath"  alt="">
                             </td>
                             <td>
                                 {{item.price | formatMoney}}
@@ -530,27 +533,38 @@
                     </div>
 
                 </TabPane>
-
             </Tabs>
 
         </div>
         <Modal v-model="modalsumit" ref="modalsumit"
-               :title="MesTitle" width="60%">
+               :title="MesTitle" width="80%">
 
             <Table v-if="orbtn===0" stripe :columns="columns1" :data="data1"></Table>
             <div v-if="orbtn===1" id="quickbd">
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <td>类型</td>
+                        <td>GPU</td>
+                        <td>CPU</td>
+                        <td>内存</td>
+                        <td>系统盘</td>
                         <td>数据盘</td>
-                        <td>购买数量</td>
+                        <td>准系统</td>
+                        <td>深度学习框架</td>
+                        <td>样本数据</td>
+                        <td>套数</td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td id="quickbdtype">{{quicktypebutton1}}</td>
-                        <td id="quickbdpan">{{quicksispan1}}</td>
+                        <td>{{this.quicktypebutton1=="经济型"?"Nvidia Titan X":"Nvida Tesla P100"}}</td>
+                        <td>Intel Dual E5-2620 v4</td>
+                        <td>{{ this.quicktypebutton1=="经济型"?"64G":"128G" }}</td>
+                        <td>{{this.quicktypebutton1=="经济型"?"SSD 128G":"SSD 240G" }}</td>
+                        <td>{{quicksispan1}}</td>
+                        <td>7046GR-TR</td>
+                        <td>Caffe</td>
+                        <td>500万车牌图片</td>
                         <td>{{quickcounts1}}套</td>
                     </tr>
                     </tbody>
@@ -605,7 +619,7 @@
     </div>
 
 </template>
-
+<!--http://192.168.0.192:8082/gpumall/Configure/image/download?fileName=pdf.png-->
 <script>
     import Qs from 'qs'
     import html2canvas from 'html2canvas';
@@ -660,8 +674,13 @@
                     },
                     {
                         title: '商品',
-                        // {{item.name}}【{{ item.pid | formatPid}}】
-                        key: 'name'
+                        key: 'name',
+                        render: (h, params) => {
+                            // params.row.submitDate = 1513267200000;
+                            return h('div',
+                                Util.nameformit(params.row.id,this.ydata)+'【'+Util.nameformit(params.row.pid,this.ydata)+'】')
+                            /*这里的this.row能够获取当前行的数据*/
+                        }
                     },
                     {
                         title: '单价',
@@ -687,20 +706,26 @@
         methods: {
             init(data) {
                 var data = data;
-                this.ydata = data;
+
                 this.$store.state.goodsarr = data; //设置state
                 var vm = this;
                 this.chosenarr = [];
-                data.map((item) => {
-                    if (item.type == 1) {
-                        vm.hData.push(item)
+                // data.map((item) => {
+                //
+                // });
+                for(var item in data){
+                    if (data[item].type == 2) {
+                        vm.chosenarr[item]=data[item]
                     }
-                });
-                data.forEach((item) => {
-                    if (item.type == 2) {
-                        vm.chosenarr[item.id] = item;
-                    }
-                });
+                }
+                for(var item in data){
+                    this.ydata.push(data[item])
+                }
+                var indexArr=data[0].child.split(',')
+                for(let i=0;i<indexArr.length;i++){
+                    vm.hData.push(data[indexArr[i]])
+                };
+
 
             },
             idformit(val, data) {
@@ -725,7 +750,12 @@
                     }
                 } else if (num == 1) {
                     this.orbtn = 1;
-                    this.MesTitle = '快速配置单信息'
+                    if(this.quicktypebutton1=='经济型'){
+                        this.MesTitle = '经济型快速配置单信息'
+                    }else {
+                        this.MesTitle = '标准型快速配置单信息'
+                    }
+
                     this.modalsumit = true;
                 }
 
@@ -899,11 +929,11 @@
                             })
                         } else if (this.orbtn == 1) {
                             var goodsInfostr = ''
-                            if(this.quicktypebutton1=='经济型'){
-                                goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'+ Util.idformit(this.quicksispan1,this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                            if (this.quicktypebutton1 == '经济型') {
+                                goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';' + Util.idformit(this.quicksispan1, this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
                                 reqData.goodsInfo = goodsInfostr;
-                            }else {
-                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'+ Util.idformit(this.quicksispan1,this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                            } else {
+                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';' + Util.idformit(this.quicksispan1, this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
                                 reqData.goodsInfo = goodsInfostr;
                             }
 

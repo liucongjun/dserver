@@ -171,11 +171,6 @@
                                 <Input type="text" v-model="deviceQueryForm.name" :maxlength="10" placeholder="请输入姓名查询">
                                 </Input>
                             </FormItem>
-                            <!--<FormItem prop="imsi">-->
-                                <!--<Input type="text" v-model="deviceQueryForm.imsi" placeholder="请输入单位查询">-->
-                                <!--</Input>-->
-                            <!--</FormItem>-->
-
                             <FormItem prop="address">
                                 <Input type="text" v-model="deviceQueryForm.address" :maxlength="11"
                                        placeholder="请输入手机号码查询">
@@ -185,6 +180,7 @@
                                 <Button type="primary" icon="search" @click="changePageNumber()">查询</Button>
                                 <Button type="error" icon="refresh" @click="resetQueryDevice()">重置</Button>
                                 <Button type="success" icon="plus-round" @click="addDevice(true)">新增</Button>
+                                <Button type="success" icon="plus-round" @click="uploadimg()">上传图片</Button>
                             </FormItem>
                         </Form>
                         </Col>
@@ -329,6 +325,16 @@
             <div slot="footer">
             </div>
         </Modal>
+        <Modal v-model="uploadimgModal" title="上传图片">
+            <Upload
+            type="drag"
+            action="http://192.168.0.192:8082/gpumall/MyOrder/queryOrder">
+            <div style="padding: 20px 0">
+                <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+                <p>Click or drag files here to upload</p>
+            </div>
+            </Upload>
+        </Modal>
     </div>
 
 </template>
@@ -361,6 +367,7 @@
                 pageNumber: 1, //当前页数
                 pageSize: 10, //页大小
                 total: 0,
+                uploadimgModal:false,
                 modallook: false,
                 modallooktitle:'',
                 deviceMesModal: false,
@@ -397,6 +404,7 @@
                         children: []
                     }]
                 },
+
                 deviceMesFromRule: {
                     imsi: [{
                         required: true,
@@ -751,6 +759,9 @@
                         this.deviceMesFrom.safetyTels = [{value: '', index: 1, status: 1}]
                     }
                 }
+            },
+            uploadimg(){
+              this.uploadimgModal=true
             },
             //新增设备按钮  执行
             addDevice(addMod) {
