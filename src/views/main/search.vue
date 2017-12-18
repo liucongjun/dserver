@@ -171,10 +171,10 @@
                                 <Input type="text" v-model="deviceQueryForm.name" :maxlength="10" placeholder="请输入姓名查询">
                                 </Input>
                             </FormItem>
-                            <FormItem prop="imsi">
-                                <Input type="text" v-model="deviceQueryForm.imsi" placeholder="请输入单位查询">
-                                </Input>
-                            </FormItem>
+                            <!--<FormItem prop="imsi">-->
+                                <!--<Input type="text" v-model="deviceQueryForm.imsi" placeholder="请输入单位查询">-->
+                                <!--</Input>-->
+                            <!--</FormItem>-->
 
                             <FormItem prop="address">
                                 <Input type="text" v-model="deviceQueryForm.address" :maxlength="11"
@@ -324,7 +324,7 @@
             </div>
         </Modal>
         <Modal v-model="modallook"
-               title="详细配置">
+               :title="modallooktitle"  width="800" >
             <Table :columns="columnslook" :data="datalook"></Table>
             <div slot="footer">
             </div>
@@ -356,12 +356,13 @@
                 }
             }
             return {
-
+                ydata:[],
                 tableData: [],
                 pageNumber: 1, //当前页数
                 pageSize: 10, //页大小
                 total: 0,
                 modallook: false,
+                modallooktitle:'',
                 deviceMesModal: false,
                 deviceMesTitle: '',
                 LoLaMes: '',
@@ -404,7 +405,7 @@
                     }],
                     name: [{
                         required: true,
-                        message: '请输入设备名称',
+                        message: '请输入名称',
                         trigger: 'blur'
                     }],
                     status: [{
@@ -558,11 +559,11 @@
                         title: '名称',
                         key: 'configId',
                         align: 'center',
-                        key: 'submitDate',
+                        width: 300,
                         render: (h, params) => {
                             // params.row.submitDate = 1513267200000;
                             return h('div',
-                                (params.row.configId))
+                                Util.nameformit(params.row.configId,this.ydata)+'【'+Util.pnameformit(params.row.configId,this.ydata)+'】')
                             /*这里的this.row能够获取当前行的数据*/
                         }
                     },
@@ -600,11 +601,11 @@
         },
         methods: {
             init(data) {
-                console.log(data);
                 this.tableData = data.rows;
                 this.total = data.total;
                 // 为Date 对象添加Format方法
             },
+
             //重置查询
             resetQueryDevice() {
                 this.$refs['deviceQueryForm'].resetFields();
@@ -764,6 +765,7 @@
             //查看
             look(data) {
                 this.datalook = data.orderJoList;
+                this.modallooktitle=data.submitterName+'的配置单详情,手机号：'+data.submitterTel
                 this.modallook = true;
             },
             //修改设备按钮  执行
@@ -895,24 +897,35 @@
             },
             changePageNumber(pageNumber) {
                 this.pageNumber = pageNumber ? pageNumber : 1;
-                // this.axios({
-                //     method: 'get',
-                //     url: 'device/listAllDevice',
-                //     params: {
-                //         pageSize: this.pageSize,
-                //         pageIndex: this.pageNumber,
-                //
-                //     }
-                // }).then(res => {
-                //     this.tableData = res.data.data;
-                //     this.total = res.data.total
-                // }).catch((e) => {
-                //     this.$Notice.error({
-                //         title: '错误',
-                //         desc: '获取设备数据时服务出错',
-                //     });
-                // })
+                new Promise((resolve) => {
+                    this.axios.get('MyOrder/queryOrder', {
+                        params: {
+                            pageSize: this.pageSize,
+                            pageNumber: this.pageNumber,
+                            submitterName: this.deviceQueryForm.name,
+                            submitterTel: this.deviceQueryForm.address,
+                        }
+                    })
+                        .then(res => {
+                            let data = res.data
+                            if (data.resultFlag) {
+                                resolve(data.data)
+                            } else {
+                                this.$Notice.error({
+                                    title: '错误',
+                                    desc: '获取数据时出错',
+                                });
+                            }
+                        }).catch((e) => {
+                        this.$Notice.error({
+                            title: '错误',
+                            desc: '获取数据时服务出错',
+                        });
+                    })
+                }).then((data) => {
 
+                    this.init(data);
+                })
             },
             changePageSize(pageSize) {
                 this.pageSize = pageSize;
@@ -920,10 +933,10 @@
             },
         },
         computed: {
-            ...mapGetters({
-                           // 映射 `this.doneCount` 为 `store.getters.doneTodosCount`
-                goodsarr
-                       })
+            // mapGetters({
+            //                // 映射 `this.doneCount` 为 `store.getters.doneTodosCount`
+            //     goodsarr
+            //            })
         },
         mounted() {
             this.deviceScroll = new IScroll('#wrapper', {
@@ -974,6 +987,29 @@
             }).then((data) => {
 
                 this.init(data);
+            });
+            new Promise((resolve) => {
+                this.axios.get('Configure/listAllConfig', {
+                    params: {}
+                })
+                    .then(res => {
+                        let data = res.data
+                        if (data.resultFlag) {
+                            resolve(data.data)
+                        } else {
+                            this.$Notice.error({
+                                title: '错误',
+                                desc: '获取数据时出错',
+                            });
+                        }
+                    }).catch((e) => {
+                    this.$Notice.error({
+                        title: '错误',
+                        desc: '获取数据时服务出错',
+                    });
+                })
+            }).then((data) => {
+               this.ydata=data
             })
         }
     }

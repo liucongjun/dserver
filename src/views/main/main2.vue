@@ -51,7 +51,7 @@
 
         width: 100%;
         #map {
-           width: 1200px !important;
+            width: 1200px !important;
             overflow: hidden;
             margin: 20px auto 0;
             font-family: "微软雅黑";
@@ -164,16 +164,16 @@
         &:nth-child(6) {
             width: 11.5%;
         }
-        &:nth-child(8), &:nth-child(4)   {
+        &:nth-child(8), &:nth-child(4) {
             width: 10.5%;
         }
         &:nth-child(1), &:nth-child(7) {
             width: 14.5%;
         }
-        &:nth-child(5){
+        &:nth-child(5) {
             width: 15%;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
             width: 16.5%;
         }
 
@@ -585,7 +585,7 @@
             </div>
         </Modal>
         <Modal v-model="modaldown"
-               title="联系我们" width="50%">
+               title="联系我们" width="90%">
             <div style="text-align:center;font-size: 16px;">
                 <p style="">
                     <Icon type="checkmark-circled" :size="20" color="green"></Icon>
@@ -609,6 +609,8 @@
 <script>
     import Qs from 'qs'
     import html2canvas from 'html2canvas';
+    import Util from '../../libs/util';
+
     export default {
         name: 'dServer',
         data() {
@@ -676,7 +678,8 @@
                         }
                     }
                 ],
-                data1: []
+                data1: [],
+                ydata: []
             }
         },
 
@@ -684,7 +687,8 @@
         methods: {
             init(data) {
                 var data = data;
-                this.$store.state.goodsarr=data; //设置state
+                this.ydata = data;
+                this.$store.state.goodsarr = data; //设置state
                 var vm = this;
                 this.chosenarr = [];
                 data.map((item) => {
@@ -697,6 +701,16 @@
                         vm.chosenarr[item.id] = item;
                     }
                 });
+
+            },
+            idformit(val, data) {
+                var id = '';
+                data.forEach(value => {
+                    if (value.name == val) {
+                        return id = value.id
+                    }
+                })
+                return id;
 
             },
             modelsumitshow(num) {
@@ -870,6 +884,7 @@
                                 if (data.resultFlag) {
                                     this.$Message.info('提交表单成功');
                                     this.modaldown = true;
+                                    this.modalsumit = false;
 
                                 } else {
                                     this.$Message.error('失败！！' + data.message);
@@ -884,8 +899,14 @@
                             })
                         } else if (this.orbtn == 1) {
                             var goodsInfostr = ''
-                            goodsInfostr += 26 + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
-                            reqData.goodsInfo = goodsInfostr
+                            if(this.quicktypebutton1=='经济型'){
+                                goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'+ Util.idformit(this.quicksispan1,this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                                reqData.goodsInfo = goodsInfostr;
+                            }else {
+                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'+ Util.idformit(this.quicksispan1,this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                                reqData.goodsInfo = goodsInfostr;
+                            }
+
                             this.axios({
                                 headers: {
                                     // 'token': JSON.parse(localStorage.getItem('userMes')).token
@@ -898,6 +919,8 @@
                                 if (data.resultFlag) {
                                     this.$Message.info('提交表单成功');
                                     this.modaldown = true;
+                                    this.modalsumit = false;
+
 
                                 } else {
                                     this.$Message.error('失败！！' + data.message);
@@ -954,10 +977,11 @@
                     }
 
 
-                    window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr)
+                    window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr);
+                    this.modalsumit = false;
                 } else if (this.orbtn == 1) {
                     var contentstr = '';
-                    if (this.quicktypebutton1 == '经济型'){
+                    if (this.quicktypebutton1 == '经济型') {
                         contentstr += 'GPU@Nvidia Titan X:' + this.quickcounts1 + ';'
                         contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';'
                         contentstr += '内存@64G:' + this.quickcounts1 + ';'
@@ -965,8 +989,8 @@
                         contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
                         contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
                         contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
-                        contentstr += '数据盘@' +this.quicksispan1+':'+ this.quickcounts1 + ';'
-                    }else  if(this.quicktypebutton1 == '标准型'){
+                        contentstr += '数据盘@' + this.quicksispan1 + ':' + this.quickcounts1 + ';'
+                    } else if (this.quicktypebutton1 == '标准型') {
                         contentstr += 'GPU@Nvida Tesla P100:' + this.quickcounts1 + ';'
                         contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';'
                         contentstr += '内存@64G:' + this.quickcounts1 + ';'
@@ -974,10 +998,11 @@
                         contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
                         contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
                         contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
-                        contentstr += '数据盘@' +this.quicksispan1+':'+ this.quickcounts1 + ';'
+                        contentstr += '数据盘@' + this.quicksispan1 + ':' + this.quickcounts1 + ';'
                     }
                 }
-                window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr)
+                window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr);
+                this.modalsumit = false;
             }
         },
         computed: {
