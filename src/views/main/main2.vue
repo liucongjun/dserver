@@ -964,7 +964,6 @@
                         } else if (value.pid == 35) {
                             str35 += value.name + ':' + value.count + ','
                         }
-
                     });
                     if (str6.length) {
                         contentstr += '深度学习框架@' + str6.substring(0, str6.length - 1) + ';'
@@ -975,8 +974,6 @@
                     if (str7.length) {
                         contentstr += '样本数据@' + str7.substring(0, str7.length - 1) + ';'
                     }
-
-
                     window.open('http://61.147.166.206:8963/gpumall/MyOrder/downLoadPdf?content=' + contentstr);
                     this.modalsumit = false;
                 } else if (this.orbtn == 1) {

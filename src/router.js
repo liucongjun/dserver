@@ -12,21 +12,21 @@ const routers = [
         path: 'vue',
         name:'vue',
         meta: {
-            title: 'GPU服务器配置vue'
+            title: 'vue'
         },
         component: (resolve) => require(['./views/main/main.vue'], resolve)
       }, {
         path: 'dServer',
         name:'dServer',
         meta: {
-            title: 'GPU服务器配置'
+            title: ''
         },
         component: (resolve) => require(['./views/main/main2.vue'], resolve)
       }, {
         path: 'search',
         name:'search',
         meta: {
-            title: 'GPU服务器配置查询'
+            title: '查询'
         },
         component: (resolve) => require(['./views/main/search.vue'], resolve)
       }
