@@ -8,7 +8,7 @@ import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 import axios from 'axios';
 import 'babel-polyfill';
-axios.defaults.baseURL = 'http://192.168.0.192:8082/gpumall/';
+axios.defaults.baseURL = 'http://61.147.166.206:8963/gpumall/';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 Vue.prototype.axios=axios;
 Vue.use(VueRouter);

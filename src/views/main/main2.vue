@@ -266,6 +266,7 @@
                                                 <th>CPU</th>
                                                 <th>内存</th>
                                                 <th>系统盘</th>
+                                                <th>数据盘</th>
                                                 <th>准系统</th>
                                                 <th>深度学习框架</th>
                                                 <th>样本数据</th>
@@ -295,7 +296,7 @@
                                                                                        alt="">
                                                 </p>
                                                     <p class="info info4">SSD 150G</p></td>
-
+                                                <td class="list"><p class="gdimg"><img src="http://ds.cstor.cn/img/yp.png" alt="" class="img-responsive"></p> <p class="info info4">SATA 4T</p></td>
                                                 <td class="list"><p class="gdimg"><img class="img-responsive"
                                                                                        src="http://ds.cstor.cn/img/xitong-img.png"
                                                                                        alt=""></p>
@@ -325,6 +326,7 @@
                                                 <th>CPU</th>
                                                 <th>内存</th>
                                                 <th>系统盘</th>
+                                                <th>数据盘</th>
                                                 <th>准系统</th>
                                                 <th>深度学习框架</th>
                                                 <th>样本数据</th>
@@ -348,12 +350,13 @@
                                                                                        alt="">
                                                 </p>
                                                     <p class="info info3">128G</p></td>
+
                                                 <td class="list"><p class="gdimg"><img class="img-responsive"
                                                                                        src="http://ds.cstor.cn/img/storage.png"
                                                                                        alt="">
                                                 </p>
                                                     <p class="info info4">SSD 240G</p></td>
-
+                                                <td class="list"><p class="gdimg"><img src="http://ds.cstor.cn/img/yp.png" alt="" class="img-responsive"></p> <p class="info info4">SATA 6T</p></td>
                                                 <td class="list"><p class="gdimg"><img class="img-responsive"
                                                                                        src="http://ds.cstor.cn/img/xitong-img.png"
                                                                                        alt=""></p>
@@ -380,28 +383,6 @@
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>数据盘</td>
-                            <td>
-                                <Tabs id="quicktab2" name="SATA 4T" v-model="quicksispan1">
-                                    <TabPane label="SATA 4T" name="SATA 4T">
-
-                                    </TabPane>
-                                    <TabPane label="SATA 6T" name="SATA 6T">
-
-                                    </TabPane>
-                                    <TabPane label="SAS 600G" name="SAS 600G">
-
-                                    </TabPane>
-                                    <TabPane label="SAS 1.2T" name="SAS 1.2T">
-
-                                    </TabPane>
-                                    <TabPane label="SAS 4T" name="SAS 4T">
-                                    </TabPane>
-                                </Tabs>
-
-                            </td>
-                        </tr>
                         <tr>
                             <td>购买数量</td>
                             <td>
@@ -505,7 +486,7 @@
                             <td>
                                 <span>
                             <strong>{{item.name}}【{{ item.pid | formatPid}}】</strong>
-                        </span><img height="50"  :src="'http://192.168.0.192:8082/gpumall/Configure/image/download?fileName='+item.imgPath"  alt="">
+                        </span> <img    :src="'http://61.147.166.206:8963/gpumall/Configure/image/download?fileName='+item.imgPath"  alt="">
                             </td>
                             <td>
                                 {{item.price | formatMoney}}
@@ -561,7 +542,7 @@
                         <td>Intel Dual E5-2620 v4</td>
                         <td>{{ this.quicktypebutton1=="经济型"?"64G":"128G" }}</td>
                         <td>{{this.quicktypebutton1=="经济型"?"SSD 128G":"SSD 240G" }}</td>
-                        <td>{{quicksispan1}}</td>
+                        <td>{{this.quicktypebutton1=="经济型"?"SATA 4T":"SATA 6T" }}</td>
                         <td>7046GR-TR</td>
                         <td>Caffe</td>
                         <td>500万车牌图片</td>
@@ -599,19 +580,10 @@
             </div>
         </Modal>
         <Modal v-model="modaldown"
-               title="联系我们" width="90%">
-            <div style="text-align:center;font-size: 16px;">
-                <p style="">
-                    <Icon type="checkmark-circled" :size="20" color="green"></Icon>
-                    提交成功
-                </p>
-                <p>你也可以联系我们，对你的配置单作详细的解答</p>
-
-                <p><img src="../../img/phone.png" width="100%"></p>
-                <p><img src="http://ds.cstor.cn/img/pdf.png" height="50" width="40"></p>
-
-                <Button type="primary" size="large" @click="downpdf">下载你的配置单</Button>
-            </div>
+               title="联系我们" width="900px">
+            <div style="text-align: center; font-size: 16px;"><p><i class="ivu-icon ivu-icon-checkmark-circled" style="font-size: 20px; color: green;"></i>
+                提交成功
+            </p> <p>你也可以联系我们，对你的配置单作详细的解答</p> <div class="pull-left"><font style="font-size: 22px;"><strong>市场部 <font color="red">  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;总机:400-8855-360</font></strong></font></div> <table class="table table-hover table-bordered"><tbody><tr><td><div align="center"><strong>销售人员</strong></div></td> <td><div align="center"><strong>分 机</strong></div></td> <td><div align="center"><strong>手机号</strong></div></td> <td><div align="center"><strong>邮 箱</strong></div></td></tr> <tr><td><div align="center">王玮</div></td> <td><div align="center">8054</div></td> <td><div align="center">15077865340</div></td> <td><div align="center">wangwei@cstor.cn</div></td></tr> <tr><td><div align="center">叶飞</div></td> <td><div align="center">8050</div></td> <td><div align="center">15651627356</div></td> <td><div align="center">yefei@cstor.cn</div></td></tr> <tr><td><div align="center">骆梦阳</div></td> <td><div align="center">8052</div></td> <td><div align="center">13952028557</div></td> <td><div align="center">luomengyang@cstor.cn</div></td></tr> <tr><td><div align="center">陈跃飞</div></td> <td><div align="center">8041</div></td> <td><div align="center">13951803427</div></td> <td><div align="center">chenyuefei@cstor.cn</div></td></tr> <tr><td><div align="center">杨 &nbsp;剑</div></td> <td><div align="center">8030</div></td> <td><div align="center">18751869256</div></td> <td><div align="center">yangjian@cstor.cn</div></td></tr> <tr><td><div align="center">何家乐</div></td> <td><div align="center">8031</div></td> <td><div align="center">18616794962</div></td> <td><div align="center">hejiale@cstor.cn</div></td></tr> <tr><td><div align="center">刘立宏</div></td> <td><div align="center">8034</div></td> <td><div align="center">13815414773</div></td> <td><div align="center">liulihong@cstor.cn</div></td></tr> <tr><td><div align="center">刘连鹏</div></td> <td><div align="center">8018</div></td> <td><div align="center">18021395113</div></td> <td><div align="center">liulianpeng@cstor.cn</div></td></tr> <tr><td><div align="center">左 &nbsp;赛</div></td> <td><div align="center">8033</div></td> <td><div align="center">18017566211</div></td> <td><div align="center">zuosai@cstor.cn</div></td></tr> <tr><td><div align="center">王 &nbsp;军</div></td> <td><div align="center">8035</div></td> <td><div align="center">13851877991</div></td> <td><div align="center">wangjun2@cstor.cn</div></td></tr> <tr><td><div align="center">张绪文心</div></td> <td><div align="center">8027</div></td> <td><div align="center">18602548008</div></td> <td><div align="center">zhangxuwenxin@cstor.cn</div></td></tr> <tr><td><div align="center">吴亚洲<br>(新疆分公司 总经理)</div></td> <td><div align="center">8022</div></td> <td><div align="center">15051819138</div></td> <td><div align="center">wuyazhou@cstor.cn</div></td></tr> <tr><td><div align="center">刘宏<br>(河南办事处 主任)</div></td> <td><div align="center">&nbsp;</div></td> <td><div align="center">13333831976</div></td> <td><div align="center">liuhong@cstor.cn</div></td></tr> <tr><td><div align="center">韦远雄<br> (广西办事处)</div></td> <td><div align="center">&nbsp;</div></td> <td><div align="center">18577997606</div></td> <td><div align="center">weiyuanxiong@cstor.cn</div></td></tr> <tr><td><div align="center">周俊<br> (湖北办事处)</div></td> <td><div align="center">&nbsp;</div></td> <td><div align="center">13995587166</div></td> <td><div align="center">zhoujun@cstor.cn</div></td></tr> <tr><td><div align="center">汤添智<br> (贵州办事处)</div></td> <td><div align="center"></div></td> <td><div align="center">13602805009</div></td> <td><div align="center">1589819668@qq.com</div></td></tr></tbody></table> <p><img src="http://ds.cstor.cn/img/pdf.png" height="50" width="40"></p> <button @click="downpdf()"  type="button" class="ivu-btn ivu-btn-primary ivu-btn-large"><!----> <!----> <span >下载你的配置单</span></button></div>
             <div slot="footer">
             </div>
         </Modal>
@@ -619,10 +591,9 @@
     </div>
 
 </template>
-<!--http://192.168.0.192:8082/gpumall/Configure/image/download?fileName=pdf.png-->
+<!--http://61.147.166.206:8963/gpumall/Configure/image/download?fileName=pdf.png-->
 <script>
     import Qs from 'qs'
-    import html2canvas from 'html2canvas';
     import Util from '../../libs/util';
 
     export default {
@@ -636,7 +607,6 @@
                 modalsumit: false,
                 quicktypebutton1: '经济型',
                 quickcounts1: 1,
-                quicksispan1: 'SATA 4T',
                 MesTitle: '',
                 orbtn: '', //自定义还是快速
                 formInline: {
@@ -930,10 +900,10 @@
                         } else if (this.orbtn == 1) {
                             var goodsInfostr = ''
                             if (this.quicktypebutton1 == '经济型') {
-                                goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';' + Util.idformit(this.quicksispan1, this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                                goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';38,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
                                 reqData.goodsInfo = goodsInfostr;
                             } else {
-                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';' + Util.idformit(this.quicksispan1, this.ydata) + ',' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';39' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
                                 reqData.goodsInfo = goodsInfostr;
                             }
 
@@ -1007,7 +977,7 @@
                     }
 
 
-                    window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr);
+                    window.open('http://61.147.166.206:8963/gpumall/MyOrder/downLoadPdf?content=' + contentstr);
                     this.modalsumit = false;
                 } else if (this.orbtn == 1) {
                     var contentstr = '';
@@ -1019,7 +989,7 @@
                         contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
                         contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
                         contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
-                        contentstr += '数据盘@' + this.quicksispan1 + ':' + this.quickcounts1 + ';'
+                        contentstr += '数据盘@SATA 4T:' + this.quickcounts1 + ';'
                     } else if (this.quicktypebutton1 == '标准型') {
                         contentstr += 'GPU@Nvida Tesla P100:' + this.quickcounts1 + ';'
                         contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';'
@@ -1028,10 +998,10 @@
                         contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
                         contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
                         contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
-                        contentstr += '数据盘@' + this.quicksispan1 + ':' + this.quickcounts1 + ';'
+                        contentstr += '数据盘@SATA 6T:' + this.quickcounts1 + ';'
                     }
                 }
-                window.open('http://192.168.0.192:8082/gpumall/MyOrder/downLoadPdf?content=' + contentstr);
+                window.open('http://61.147.166.206:8963/gpumall/MyOrder/downLoadPdf?content=' + contentstr);
                 this.modalsumit = false;
             }
         },
@@ -1055,17 +1025,6 @@
                     btnprice = '72'
                 }
                 let panprice2 = '';
-                if (this.quicksispan1 == 'SATA 4T') {
-                    panprice2 = '22'
-                } else if (this.quicksispan1 == 'SATA 6T') {
-                    panprice2 = '33'
-                } else if (this.quicksispan1 == 'SAS 600G') {
-                    panprice2 = '44'
-                } else if (this.quicksispan1 == 'SAS 1.2T') {
-                    panprice2 = '55'
-                } else if (this.quicksispan1 == 'SAS 4T') {
-                    panprice2 = '66'
-                }
                 totalPrice2 = this.quickcounts1 * btnprice * panprice2 * 0;
 
                 return totalPrice2

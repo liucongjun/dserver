@@ -328,7 +328,7 @@
         <Modal v-model="uploadimgModal" title="上传图片">
             <Upload
             type="drag"
-            action="http://192.168.0.192:8082/gpumall/MyOrder/queryOrder">
+            action="http://61.147.166.206:8963/gpumall/Configure/addConfigOfSecond">
             <div style="padding: 20px 0">
                 <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                 <p>Click or drag files here to upload</p>
