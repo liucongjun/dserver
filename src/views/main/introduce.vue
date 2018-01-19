@@ -1,7 +1,5 @@
 <template>
     <div class="product-body J-mainContent">
-
-
         <div class="c-hero-section J-pdBanner">
             <!--autoplay-->
             <Carousel autoplay v-model="value1" loop>
@@ -196,7 +194,6 @@
 
     </div>
 
-    </div>
 </template>
 
 <script>
@@ -304,73 +301,10 @@
         visibility: hidden
     }
 
-    .c-media-horiz .c-media-img {
-        display: table-cell;
-        vertical-align: top;
-        width: inherit;
-        padding: 0 15px 0 0
-    }
-
-    .c-media-horiz .c-media-body {
-        display: table-cell;
-        vertical-align: top;
-        margin-top: 0
-    }
-
     .c-media-heading {
         text-align: left;
         height: 40px;
         line-height: 40px;
-    }
-
-    .c-media-skin-scene:hover .c-media-heading {
-        color: #00a4ff
-    }
-
-    .c-media-skin-lab .c-media-body {
-        height: 118px
-    }
-
-    .c-media-skin-lab:hover .c-media-heading {
-        color: #00a4ff
-    }
-
-    .c-media-skin-resource .c-media-heading {
-        text-align: left
-    }
-
-    .c-media-skin-resource:hover .c-media-heading {
-        color: #00a4ff
-    }
-
-    .c-dialog-hd-close span {
-        display: none
-    }
-
-    .c-dialog-confirm a {
-        color: #00a4ff
-    }
-
-    .c-dialog-confirm a:hover {
-        text-decoration: underline
-    }
-
-    .c-hero-aside-item a {
-        color: #fff;
-        text-decoration: underline
-    }
-
-    .c-hero-aside-item a:hover {
-        color: #00a4ff
-    }
-
-    .c-hero-aside-item em {
-        font-size: 46px
-    }
-
-    .c-dropdown.m .c-dropdown-menu li a, .c-table-fixed-body .c-dropdown .c-dropdown-menu li a {
-        height: 27px;
-        line-height: 27px
     }
 
     .c-grid-inner [class*=c-g-] {
@@ -400,26 +334,6 @@
     .c-g-8 {
         width: 49.5%;
         margin-bottom: 30px;
-    }
-
-    .c-bubble-num span {
-        vertical-align: middle;
-        margin-left: 5px;
-        color: #fff
-    }
-
-    .format-tips-links a:hover {
-        text-decoration: underline
-    }
-
-    .c-tab-normal .c-tab-simple a {
-        display: block;
-        padding: 10px 30px;
-        text-decoration: none
-    }
-
-    .c-tab-vertical .c-tab-simple a {
-        padding-right: 20px
     }
 
     .c-section.c-p-y-tall {
