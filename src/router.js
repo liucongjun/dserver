@@ -16,14 +16,14 @@ const routers = [
           },
           component: (resolve) => require(['./views/main/introduce.vue'], resolve)
       },
-        {
-            path: 'vue',
-            name: 'vue',
-            meta: {
-                title: ''
-            },
-            component: (resolve) => require(['./views/main/main.vue'], resolve)
-        },
+        // {
+        //     path: 'vue',
+        //     name: 'vue',
+        //     meta: {
+        //         title: ''
+        //     },
+        //     component: (resolve) => require(['./views/main/main.vue'], resolve)
+        // },
         {
         path: 'dServer',
         name:'dServer',

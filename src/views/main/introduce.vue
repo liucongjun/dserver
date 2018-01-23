@@ -43,16 +43,23 @@
                     <div class="c-section-hd">
                         <h3 class="c-section-tit">dServer人工智能服务器的简介</h3>
                         <br>
-                        <div style="text-align: center"><img src="../../img/ds.jpg" height="276" width="395"/></div>
+
                     </div>
-                    <div class="c-section-bd">
-                        <div class="about-mod-con">
-                            <div class="c-media-horiz about-intro">
-                                <p class="c-media-info" style="line-height: 2;">
-                                    　人工智能研究方兴未艾，但构建高性价比的硬件平台是一大难题，亟需高性能、点菜式的解决方案。dServer人工智能服务器针对个性化的AI应用需求，采用英特尔CPU+英伟达GPU的混合架构，具备强劲的计算性能，提供多类型的CPU、GPU、软件、内存、硬盘、数据等备选，方便自由选配，定制安全可靠的个性化应用，可广泛用于图像识别、语音识别和语言翻译等AI领域。
-                                </p>
+                    <div class="c-section-bd row">
+                        <div class="col-md-5">
+                            <div style="text-align: center"><img src="../../img/ds.jpg" height="276" width="395"/></div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="about-mod-con">
+                                <div class="c-media-horiz about-intro">
+                                    <p class="c-media-info" style="line-height: 2;">
+                                        　
+                                        人工智能研究方兴未艾，但构建高性价比的硬件平台是一大难题，亟需高性能、点菜式的解决方案。dServer人工智能服务器针对个性化的AI应用需求，采用英特尔CPU+英伟达GPU的混合架构，具备强劲的计算性能，提供多类型的CPU、GPU、软件、内存、硬盘、数据等备选，方便自由选配，定制安全可靠的个性化应用，可广泛用于图像识别、语音识别和语言翻译等AI领域。
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -72,14 +79,14 @@
                                 </div>
                                 <div class="c-media-body">
                                     <h4 class="c-media-heading">
-                                        <p><strong>　　<span style="font-size: 10.5pt;">英特尔CPU+英伟达GPU，强强联合</span></strong>
+                                        <p><strong>英特尔CPU+英伟达GPU，强强联合</strong>
                                         </p>
                                     </h4>
                                     <div class="c-media-info">
-                                        <p><span style="font-size: 10.5pt;">服务器采用GPU+CPU的混合架构</span></p>
-                                        <p><span style="font-size: 10.5pt;">CPU选用英特尔® 至强® E5-2600系列处理器</span></p>
-                                        <p><span style="font-size: 10.5pt;">采用NVIDIA® GPU计算平台</span></p>
-                                        <p><span style="font-size: 10.5pt;">每台服务器可插入1-10块英伟达GPU</span></p>
+                                        <p>服务器采用GPU+CPU的混合架构</p>
+                                        <p>CPU选用英特尔® 至强® E5-2600系列处理器</p>
+                                        <p>采用NVIDIA® GPU计算平台</p>
+                                        <p>每台服务器可插入1-10块英伟达GPU</p>
                                     </div>
                                 </div>
                             </div>
@@ -92,12 +99,13 @@
                                     <img src="../../img/ten.png" height="51" width="293"/></div>
                                 <div class="c-media-body">
                                     <h4 class="c-media-heading">
-                                        <p>　　<strong><span style="font-size: 10.5pt;">主流软件+丰富数据，开箱即用</span></strong></p>
+                                        <p>　　<strong>主流软件+丰富数据，开箱即用</strong></p>
                                     </h4>
                                     <div class="c-media-info">
-                                        <p><span style="font-size: 10.5pt;">人工智能服务器预装CentOS操作系统，集成两套行业主流开源工具软件——TensorFlow &amp;Caffe，同时提供丰富的应用数据，开箱即用。</span>
+                                        <p>人工智能服务器预装CentOS操作系统，集成两套行业主流开源工具软件——TensorFlow &amp;Caffe，同时提供丰富的应用数据，开箱即用。
                                         </p>
-                                        <p><span style="font-size: 10.5pt;">TensorFlow支持CNN、RNN和LSTM算法，这是目前在Image、Speech和NLP流行的深度神经网络模型，灵活的架构可以在多种平台上展开计算。</span>
+                                        <p>
+                                            TensorFlow支持CNN、RNN和LSTM算法，这是目前在Image、Speech和NLP流行的深度神经网络模型，灵活的架构可以在多种平台上展开计算。
                                         </p>
                                     </div>
                                 </div>
@@ -111,10 +119,10 @@
                                     <img src="../../img/duo.png" height="45" width="67"/></div>
                                 <div class="c-media-body">
                                     <h4 class="c-media-heading">
-                                        <p>　　<strong><span style="font-size: 10.5pt;">多样化配置，订餐式选配</span></strong></p>
+                                        <p>　　<strong>多样化配置，订餐式选配</strong></p>
                                     </h4>
                                     <div class="c-media-info">
-                                        <p><span style="font-size: 10.5pt;">用户登录ds.cstor.cn，如同订餐一般，通过“快速选配”或者“自定义选配”选择适用的硬件。</span>
+                                        <p>用户登录ds.cstor.cn，如同订餐一般，通过“快速选配”或者“自定义选配”选择适用的硬件。
                                         </p>
                                     </div>
 
@@ -256,6 +264,13 @@
         border-style: none
     }
 
+    p {
+        font-size: 16px;
+    }
+
+    .c-media-info p {
+        line-height: 2;
+    }
     .c-btn {
         height: 35px;
         min-width: 140px;
