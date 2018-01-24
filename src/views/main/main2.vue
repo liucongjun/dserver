@@ -79,13 +79,7 @@
         }
     }
 
-    .ivu-tabs {
-        .ivu-tabs-bar {
-            .ivu-tabs-nav {
-                width: 100%;
-            }
-        }
-    }
+
 
     #peitb thead, #tips-list1 thead, #tips-list2 thead, #modalsumit-md thead {
         color: #fff;
@@ -93,6 +87,13 @@
         font-size: 1.1em;
     }
 
+    .ivu-tabs {
+        .ivu-tabs-bar {
+            .ivu-tabs-nav {
+                width: 100%;
+            }
+        }
+    }
     .ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab {
         width: calc(50% - 2px);
         height: 50px !important;
@@ -691,12 +692,10 @@
                 for(var item in data){
                     this.ydata.push(data[item])
                 }
-                var indexArr=data[0].child.split(',')
+                var indexArr = data[0].child.split(',');
                 for(let i=0;i<indexArr.length;i++){
                     vm.hData.push(data[indexArr[i]])
-                };
-
-
+                }
             },
             idformit(val, data) {
                 var id = '';
@@ -704,7 +703,7 @@
                     if (value.name == val) {
                         return id = value.id
                     }
-                })
+                });
                 return id;
 
             },
@@ -715,7 +714,7 @@
                     var flag = this.checkprefour();
                     if (flag) {
                         this.data1 = this.cheekarr;
-                        this.MesTitle = '自定义配置单信息'
+                        this.MesTitle = '自定义配置单信息';
                         this.modalsumit = true;
                     }
                 } else if (num == 1) {
@@ -741,7 +740,6 @@
                     $(e.srcElement).removeClass('active');
 
                 }
-                ;
                 var vm = this;
                 setTimeout(function () {
                     var $a = $('#peitb a.active');
@@ -763,7 +761,6 @@
                     $(e.srcElement).toggleClass('active');
 
                 }
-                ;
                 var vm = this;
                 setTimeout(function () {
                     var $a = $('#peitb a.active');
@@ -790,7 +787,6 @@
                         $(e.srcElement).removeClass('active');
 
                     }
-                    ;
                 } else {
                     if (!$(e.srcElement).hasClass('active')) {
                         // $(e.srcElement).parents('ul').find('a:lt(2)').removeClass('active');
@@ -800,9 +796,7 @@
                         $(e.srcElement).removeClass('active');
 
                     }
-                    ;
                 }
-                ;
                 var vm = this;
                 setTimeout(function () {
                     var $a = $('#peitb a.active');
@@ -866,11 +860,11 @@
                             submitterCompany: this.formInline.submitterCompany,
                         };
                         if (this.orbtn == 0) {
-                            var goodsInfostr = ''
+                            var goodsInfostr = '';
                             this.cheekarr.forEach(value => {
                                 goodsInfostr += value.id + ',' + value.count + ',' + (value.count * value.price).toFixed(2) + ';'
                             });
-                            reqData.goodsInfo = goodsInfostr
+                            reqData.goodsInfo = goodsInfostr;
 
                             this.axios({
                                 headers: {
@@ -880,7 +874,7 @@
                                 url: 'MyOrder/saveOrder',
                                 data: Qs.stringify(reqData)
                             }).then(res => {
-                                let data = res.data
+                                let data = res.data;
                                 if (data.resultFlag) {
                                     this.$Message.info('提交表单成功');
                                     this.modaldown = true;
@@ -889,7 +883,6 @@
                                 } else {
                                     this.$Message.error('失败！！' + data.message);
                                 }
-                                ;
                             }).catch((e) => {
                                 this.$Notice.error({
                                     title: '错误',
@@ -898,12 +891,12 @@
                                 this.$refs['formInline'].resetFields();
                             })
                         } else if (this.orbtn == 1) {
-                            var goodsInfostr = ''
+                            var goodsInfostr = '';
                             if (this.quicktypebutton1 == '经济型') {
-                                goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';38,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                                goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';38,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';';
                                 reqData.goodsInfo = goodsInfostr;
                             } else {
-                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';39' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';'
+                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';39' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';';
                                 reqData.goodsInfo = goodsInfostr;
                             }
 
@@ -915,7 +908,7 @@
                                 url: 'MyOrder/saveOrder',
                                 data: Qs.stringify(reqData)
                             }).then(res => {
-                                let data = res.data
+                                let data = res.data;
                                 if (data.resultFlag) {
                                     this.$Message.info('提交表单成功');
                                     this.modaldown = true;
@@ -925,7 +918,6 @@
                                 } else {
                                     this.$Message.error('失败！！' + data.message);
                                 }
-                                ;
                             }).catch((e) => {
                                 this.$Notice.error({
                                     title: '错误',
@@ -979,22 +971,22 @@
                 } else if (this.orbtn == 1) {
                     var contentstr = '';
                     if (this.quicktypebutton1 == '经济型') {
-                        contentstr += 'GPU@Nvidia Titan X:' + this.quickcounts1 + ';'
-                        contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';'
-                        contentstr += '内存@64G:' + this.quickcounts1 + ';'
-                        contentstr += '系统盘@SSD 150G:' + this.quickcounts1 + ';'
-                        contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
-                        contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
-                        contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
+                        contentstr += 'GPU@Nvidia Titan X:' + this.quickcounts1 + ';';
+                        contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';';
+                        contentstr += '内存@64G:' + this.quickcounts1 + ';';
+                        contentstr += '系统盘@SSD 150G:' + this.quickcounts1 + ';';
+                        contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';';
+                        contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';';
+                        contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';';
                         contentstr += '数据盘@SATA 4T:' + this.quickcounts1 + ';'
                     } else if (this.quicktypebutton1 == '标准型') {
-                        contentstr += 'GPU@Nvida Tesla P100:' + this.quickcounts1 + ';'
-                        contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';'
-                        contentstr += '内存@64G:' + this.quickcounts1 + ';'
-                        contentstr += '系统盘@SSD 150G:' + this.quickcounts1 + ';'
-                        contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';'
-                        contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';'
-                        contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';'
+                        contentstr += 'GPU@Nvida Tesla P100:' + this.quickcounts1 + ';';
+                        contentstr += 'CPU@Intel Dual E5-2620 v4:' + this.quickcounts1 + ';';
+                        contentstr += '内存@64G:' + this.quickcounts1 + ';';
+                        contentstr += '系统盘@SSD 150G:' + this.quickcounts1 + ';';
+                        contentstr += '准系统@7046GR-TR:' + this.quickcounts1 + ';';
+                        contentstr += '深度学习框架@Caffe:' + this.quickcounts1 + ';';
+                        contentstr += '样本数据@500万车牌图片:' + this.quickcounts1 + ';';
                         contentstr += '数据盘@SATA 6T:' + this.quickcounts1 + ';'
                     }
                 }
@@ -1010,7 +1002,7 @@
                 this.cheekarr.forEach(item => {
                     totalPrice += item.price * item.count;
 
-                })
+                });
                 return totalPrice
             },
             total_price2: function () {
@@ -1074,7 +1066,7 @@
                     params: {}
                 })
                     .then(res => {
-                        let data = res.data
+                        let data = res.data;
                         if (data.resultFlag) {
                             resolve(data.data)
                         } else {
