@@ -1,12 +1,22 @@
-<style>
+<style scoped>
+    body {
+        -webkit-font-smoothing: antialiased;
+        font-family: "Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;";
+    }
+
     p {
-        font-size: 16px;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;";
     }
 
     .c-media-info p {
-        line-height: 2;
+        line-height: 1.4;
     }
 
+    strong {
+        font-size: 16px;
+    }
     .c-btn {
         height: 35px;
         min-width: 140px;
@@ -82,13 +92,8 @@
         vertical-align: top;
     }
 
-    .c-g-8 {
-        width: 49.5%;
-        margin-bottom: 30px;
-    }
-
     .c-section.c-p-y-tall {
-        padding: 70px 0 80px
+        padding: 70px 0 20px
     }
 
     .c-section.c-p-y-short {
@@ -103,6 +108,10 @@
         box-sizing: border-box;
         -webkit-box-sizing: border-box;
         padding: 0 10px;
+
+    }
+
+    .function-mod {
         background: #fff;
     }
 
@@ -181,30 +190,38 @@
         margin-left: 20px
     }
 
-    .ivu-tabs
-    .ivu-tabs-bar
-    .ivu-tabs-nav {
-        width: 100%;
-        height: 50px;
+    /*.c-section-inner > .nav-tabs {*/
+    /*padding-left: 30%;*/
+    /*}*/
 
+    .c-section-inner > .nav-tabs > li > a {
+        color: #000;
+        font-size: 18px;
     }
 
-    .ivu-tabs-nav .ivu-tabs-tab {
-        display: inline-block;
-        height: 100%;
-        width: calc(33% - 2px);
-        padding: 28px 16px;
-        height: 70px;
-        line-height: 30px;
-        font-size: 20px;
-        margin-right: 33%;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
+    .c-section-inner > .nav-tabs > li {
+        width: 25%;
         text-align: center;
-        text-decoration: none;
-        position: relative;
-        transition: color .3s ease-in-out;
+    }
+
+    .c-section-inner > .nav-tabs > li.active > a, .c-section-inner > .nav-tabs > li.active > a:focus, .c-section-inner > .nav-tabs > li.active > a:hover {
+        color: #00a4ff;
+        cursor: default;
+        background-color: #fff;
+        border: transparent;
+        border-bottom: 3px solid #00a4ff;
+    }
+
+    .c-section-bd {
+        margin-top: 20px;
+    }
+
+    .c-media-img {
+        margin: 10px;
+    }
+
+    ul li {
+        list-style: disc;
     }
 </style>
 <template>
@@ -246,42 +263,46 @@
 
         </div>
 
-        <div class="J-subContent">
-            <div class="c-section c-p-y-short about-mod">
-                <div class="c-section-inner">
-                    <div class="c-section-hd">
-                        <h3 class="c-section-tit">dServer人工智能服务器的简介</h3>
-                        <br>
-
-                    </div>
-                    <div class="c-section-bd row">
-                        <div class="col-md-5">
-                            <div style="text-align: center"><img src="../../img/ds.jpg" height="276" width="395"/></div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="about-mod-con">
-                                <div class="c-media-horiz about-intro">
-                                    <p class="c-media-info" style="line-height: 2;">
-                                        　
-                                        人工智能研究方兴未艾，但构建高性价比的硬件平台是一大难题，亟需高性能、点菜式的解决方案。dServer人工智能服务器针对个性化的AI应用需求，采用英特尔CPU+英伟达GPU的混合架构，具备强劲的计算性能，提供多类型的CPU、GPU、软件、内存、硬盘、数据等备选，方便自由选配，定制安全可靠的个性化应用，可广泛用于图像识别、语音识别和语言翻译等AI领域。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="c-section c-p-y-tall function-mod">
             <div class="c-section-inner">
-                <Tabs>
-                    <TabPane label="产品特性">
-                        <div class="c-section-bd">
-                            <div role="list" class="c-grid function-list">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs center-block" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                              data-toggle="tab">产品简介</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                               data-toggle="tab">产品特性</a></li>
+                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">产品配置</a>
+                    </li>
+                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">典型应用</a>
+                    </li>
+                </ul>
 
-                                <div role="listitem" class="c-g-8">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <div class="c-section-bd row">
+                            <div class="col-md-6">
+                                <div style="text-align: center;margin: 20px;"><img src="../../img/ds.jpg" height="240"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="about-mod-con">
+                                    <div class="c-media-horiz about-intro">
+                                        <p class="c-media-info" style="line-height: 2;">
+                                            　
+                                            &#8195;人工智能研究方兴未艾，但构建高性价比的硬件平台是一大难题，亟需高性能、点菜式的解决方案。dServer人工智能服务器针对个性化的AI应用需求，采用英特尔CPU+英伟达GPU的混合架构，具备强劲的计算性能，提供多类型的CPU、GPU、软件、内存、硬盘、数据等备选，方便自由选配，定制安全可靠的个性化应用，可广泛用于图像识别、语音识别和语言翻译等AI领域。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="profile">
+                        <div class="c-section-bd">
+                            <div role="list" class="row c-grid function-list" style="padding-top: 40px;">
+
+                                <div role="listitem" class="col-md-4">
                                     <div class="c-media">
                                         <div class="c-media-img">
                                             <img src="../../img/intel.png" height="59" width="178"/>
@@ -292,16 +313,23 @@
                                                 </p>
                                             </h4>
                                             <div class="c-media-info">
-                                                <p>服务器采用GPU+CPU的混合架构</p>
-                                                <p>CPU选用英特尔® 至强® E5-2600系列处理器</p>
-                                                <p>采用NVIDIA® GPU计算平台</p>
-                                                <p>每台服务器可插入1-10块英伟达GPU</p>
+                                                <ul style="line-height: 2;">
+                                                    <li> 服务器采用GPU+CPU的混合架构。</li>
+                                                    <li>CPU选用英特尔® 至强® E5-2600系列处理器。</li>
+                                                    <li>采用NVIDIA® GPU计算平台。</li>
+                                                    <li>每台服务器可插入1-10块英伟达GPU。</li>
+                                                    <li>具备高并行度、矩阵运算与强大的浮点计算能力。</li>
+                                                    <li>NVIDIA TITAN X 消费级GPU基于Pascal™架构，专为PC平台而设计。</li>
+                                                    <li>NVIDIA® Tesla® 数据中心GPU则为数据中心而打造。</li>
+                                                    <li>NVIDIA GeForce GTX 1080可提供优异的性能、能效和游戏体验。</li>
+
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div role="listitem" class="c-g-8">
+                                <div role="listitem" class="col-md-4">
                                     <div class="c-media">
                                         <div class="c-media-img">
 
@@ -311,17 +339,21 @@
                                                 <p>　　<strong>主流软件+丰富数据，开箱即用</strong></p>
                                             </h4>
                                             <div class="c-media-info">
-                                                <p>人工智能服务器预装CentOS操作系统，集成两套行业主流开源工具软件——TensorFlow &amp;Caffe，同时提供丰富的应用数据，开箱即用。
-                                                </p>
-                                                <p>
-                                                    TensorFlow支持CNN、RNN和LSTM算法，这是目前在Image、Speech和NLP流行的深度神经网络模型，灵活的架构可以在多种平台上展开计算。
-                                                </p>
+                                                <ul style="line-height: 2;">
+                                                    <li> 人工智能服务器预装CentOS操作系统，集成两套行业主流开源工具软件——TensorFlow &amp;Caffe，同时提供丰富的应用数据，开箱即用。</li>
+                                                    <li>
+                                                        TensorFlow支持CNN、RNN和LSTM算法，这是目前在Image、Speech和NLP流行的深度神经网络模型，灵活的架构可以在多种平台上展开计算。
+                                                    </li>
+                                                    <li>
+                                                        Caffe是纯粹的C++/CUDA架构，支持命令行、Python和MATLAB接口，可以在CPU和GPU64直接无缝切换。提供MNIST、CIFAR-10等训练测试数据，包括大量的人脸数据、车牌数据等。
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div role="listitem" class="c-g-8">
+                                <div role="listitem" class="col-md-4">
                                     <div class="c-media">
                                         <div class="c-media-img">
 
@@ -330,33 +362,42 @@
                                             <h4 class="c-media-heading">
                                                 <p>　　<strong>多样化配置，订餐式选配</strong></p>
                                             </h4>
-                                            <div class="c-media-info">
-                                                <p>用户登录ds.cstor.cn，如同订餐一般，通过“快速选配”或者“自定义选配”选择适用的硬件。
-                                                </p>
+                                            <div class="c-media-info" style="padding-top: 6px;">
+
+                                                <ul style="line-height: 2;">
+                                                    <li>
+                                                        用户登录ds.cstor.cn，如同订餐一般，通过“快速选配”或者“自定义选配”选择适用的硬件。
+
+                                                    </li>
+                                                    <li>
+                                                        配置选项附有详细的参数说明。
+                                                    </li>
+                                                    <li>
+                                                        提供配置清单下载服务。
+                                                    </li>
+                                                    <li>
+                                                        根据清单配置预装相应软件与数据，开箱即用。
+                                                    </li>
+                                                </ul>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
 
-                                <div role="listitem" class="c-g-8">
-                                    <div class="c-media">
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </TabPane>
-                    <TabPane label="产品配置">
-                        <div class="c-section-bd">
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="messages">
+                        <div class="c-section-bd" style="padding-top: 20px">
                             <div class="c-tab-responsive J-tabWrapper">
 
 
-                                <img src="../../img/peizhi.png" height="623" width="1206"/></div>
+                                <img src="../../img/peizhi.png" height="500" width="1206"/></div>
                         </div>
-                    </TabPane>
-                    <TabPane label="典型应用">
-                        <div class="c-section-bd">
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="settings">
+                        <div class="c-section-bd" style="padding-top: 40px">
                             <div class="c-tab-responsive J-tabWrapper">
 
                                 <p style="line-height: 2;">
@@ -364,17 +405,17 @@
                                 </p>
                                 <p style="line-height: 2;">
                                     　　目前，人工智能服务器已经中标清华大学车联网数据云平台项目、西安科技大学大数据深度学习平台项目、湖北文理学院大数据处理与分析平台项目(中地共建)以及南京大学项目等，之后将陆续部署使用。其中，清华大学采购项目配置如下：</p>
-                                <p style="line-height: 2;"><br>
-                                </p>
-                                <p style="text-align: center; line-height: 2;"><img style="width: 100%; height: 400px;"
-                                                                                    border="0"
-                                                                                    src="http://www.cstor.cn/webedit/uploadfile/20171206184928268.png">
+
+                                <p style="text-align: center; line-height: 2;"><img
+                                        style="width: 100%; height: 400px;"
+                                        border="0"
+                                        src="http://www.cstor.cn/webedit/uploadfile/20171206184928268.png">
                                 </p>
 
                             </div>
                         </div>
-                    </TabPane>
-                </Tabs>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="c-section c-p-y-tall home-footer-mod">
@@ -384,11 +425,11 @@
                 </div>
                 <div class="c-section-bd">
                     <div class="home-footer-info">
-                        <p>轻松开始使用。只需点几次鼠标，即可创建您的首个dServer人工智能服务器。</p>
+                        <p class="text-center">轻松开始使用。只需点几次鼠标，即可创建您的首个dServer人工智能服务器。</p>
                         <br>
                         <br>
                     </div>
-                    <div class="home-footer-btn" style="text-align: center">
+                    <div class="home-footer-btn" style="text-align: center;margin-bottom: 20px;">
                         <router-link to="/dServer"
                                      class="c-btn buy">
                             立即选购
