@@ -602,6 +602,7 @@
         data() {
             return {
                 hData: [],//初始所有
+                childdata: [],//一级排序数组
                 chosenarr: {},//所有二级
                 cheekarr: [],//被选中的
                 modaldown: false,
@@ -684,14 +685,21 @@
                 // data.map((item) => {
                 //
                 // });
+                //child数组决定排序
                 for(var item in data){
-                    if (data[item].type == 2) {
-                        vm.chosenarr[item]=data[item]
+                    this.ydata.push(data[item]);
+                    if (data[item].type == 1) {
+                        data[item].child.split(',').forEach(value => {
+                            vm.childdata.push(value)
+                        })
                     }
                 }
-                for(var item in data){
-                    this.ydata.push(data[item])
+                //按child排序可被选中的数组
+                for (var item in vm.childdata) {
+                    vm.chosenarr[vm.childdata[item]] = data[vm.childdata[item]]
                 }
+                // console.log(vm.chosenarr);
+
                 var indexArr = data[0].child.split(',');
                 for(let i=0;i<indexArr.length;i++){
                     vm.hData.push(data[indexArr[i]])
@@ -1013,8 +1021,7 @@
                 } else {
                     btnprice = '72'
                 }
-                let panprice2 = '';
-                totalPrice2 = this.quickcounts1 * btnprice * panprice2 * 0;
+                totalPrice2 = this.quickcounts1 * btnprice * 0;
 
                 return totalPrice2
             }
