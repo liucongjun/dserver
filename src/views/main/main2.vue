@@ -79,8 +79,6 @@
         }
     }
 
-
-
     #peitb thead, #tips-list1 thead, #tips-list2 thead, #modalsumit-md thead {
         color: #fff;
         background: #000;
@@ -94,6 +92,7 @@
             }
         }
     }
+
     .ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab {
         width: calc(50% - 2px);
         height: 50px !important;
@@ -297,7 +296,10 @@
                                                                                        alt="">
                                                 </p>
                                                     <p class="info info4">SSD 150G</p></td>
-                                                <td class="list"><p class="gdimg"><img src="http://ds.cstor.cn/img/yp.png" alt="" class="img-responsive"></p> <p class="info info4">SATA 4T</p></td>
+                                                <td class="list"><p class="gdimg"><img
+                                                        src="http://ds.cstor.cn/img/yp.png" alt=""
+                                                        class="img-responsive"></p>
+                                                    <p class="info info4">SATA 4T</p></td>
                                                 <td class="list"><p class="gdimg"><img class="img-responsive"
                                                                                        src="http://ds.cstor.cn/img/xitong-img.png"
                                                                                        alt=""></p>
@@ -357,7 +359,10 @@
                                                                                        alt="">
                                                 </p>
                                                     <p class="info info4">SSD 240G</p></td>
-                                                <td class="list"><p class="gdimg"><img src="http://ds.cstor.cn/img/yp.png" alt="" class="img-responsive"></p> <p class="info info4">SATA 6T</p></td>
+                                                <td class="list"><p class="gdimg"><img
+                                                        src="http://ds.cstor.cn/img/yp.png" alt=""
+                                                        class="img-responsive"></p>
+                                                    <p class="info info4">SATA 6T</p></td>
                                                 <td class="list"><p class="gdimg"><img class="img-responsive"
                                                                                        src="http://ds.cstor.cn/img/xitong-img.png"
                                                                                        alt=""></p>
@@ -419,37 +424,41 @@
                             <td class="text-center" v-for="(n,indexs) in hData" :key="indexs">
                                 <div v-if="indexs<4">
                                     <ul :id=indexs>
-                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
-                                            <p v-if="item.pid==indexs+1"><a href="#" :id="item.id" :index="item.index"
-                                                                            @click="checkChange(item,index,$event)">
-                                                {{item.name}}</a></p>
+                                        <li v-if="item" :key="item" v-for="(item,index) in childdata">
+                                            <p v-if="chosenarr[item].pid==indexs+1"><a href="#" :id="chosenarr[item].id"
+                                                                                       :index="chosenarr[item].index"
+                                                                                       @click="checkChange(chosenarr[item],index,$event)">
+                                                {{chosenarr[item].name}}</a></p>
                                         </li>
                                     </ul>
                                 </div>
                                 <div v-if="indexs==4">
                                     <ul :id=indexs>
-                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
-                                            <p v-if="item.pid==35"><a href="#" :id="item.id" :index="item.index"
-                                                                      @click="checkChange2(item,index,$event)">
-                                                {{item.name}}</a></p>
+                                        <li v-if="item" :key="item" v-for="(item,index) in childdata">
+                                            <p v-if="chosenarr[item].pid==35"><a href="#" :id="chosenarr[item].id"
+                                                                                 :index="chosenarr[item].index"
+                                                                                 @click="checkChange2(chosenarr[item],index,$event)">
+                                                {{chosenarr[item].name}}</a></p>
                                         </li>
                                     </ul>
                                 </div>
                                 <div v-if="indexs==7">
                                     <ul :id=indexs>
-                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
-                                            <p v-if="item.pid==indexs"><a href="#" :id="item.id" :index="item.index"
-                                                                          @click="checkChange3(item,index,$event)">
-                                                {{item.name}}</a></p>
+                                        <li v-if="item" :key="item" v-for="(item,index) in childdata">
+                                            <p v-if="chosenarr[item].pid==indexs"><a href="#" :id="chosenarr[item].id"
+                                                                                     :index="chosenarr[item].index"
+                                                                                     @click="checkChange3(chosenarr[item],index,$event)">
+                                                {{chosenarr[item].name}}</a></p>
                                         </li>
                                     </ul>
                                 </div>
                                 <div v-if="indexs==5||indexs==6">
                                     <ul :id=indexs>
-                                        <li v-if="item" :key="item.id" v-for="(item,index) in chosenarr">
-                                            <p v-if="item.pid==indexs"><a href="#" :id="item.id" :index="item.index"
-                                                                          @click="checkChange2(item,index,$event)">
-                                                {{item.name}}</a></p>
+                                        <li v-if="item" :key="item" v-for="(item,index) in childdata">
+                                            <p v-if="chosenarr[item].pid==indexs"><a href="#" :id="chosenarr[item].id"
+                                                                                     :index="chosenarr[item].index"
+                                                                                     @click="checkChange2(chosenarr[item],index,$event)">
+                                                {{chosenarr[item].name}}</a></p>
                                         </li>
                                     </ul>
                                 </div>
@@ -487,7 +496,9 @@
                             <td>
                                 <span>
                             <strong>{{item.name}}【{{ item.pid | formatPid}}】</strong>
-                        </span> <img    :src="'http://61.147.166.206:8963/gpumall/Configure/image/download?fileName='+item.imgPath"  alt="">
+                        </span> <img
+                                    :src="'http://61.147.166.206:8963/gpumall/Configure/image/download?fileName='+item.imgPath"
+                                    alt="">
                             </td>
                             <td>
                                 {{item.price | formatMoney}}
@@ -582,9 +593,260 @@
         </Modal>
         <Modal v-model="modaldown"
                title="联系我们" width="900px">
-            <div style="text-align: center; font-size: 16px;"><p><i class="ivu-icon ivu-icon-checkmark-circled" style="font-size: 20px; color: green;"></i>
+            <div style="text-align: center; font-size: 16px;"><p><i class="ivu-icon ivu-icon-checkmark-circled"
+                                                                    style="font-size: 20px; color: green;"></i>
                 提交成功
-            </p> <p>你也可以联系我们，对你的配置单作详细的解答</p> <div class="pull-left"><font style="font-size: 22px;"><strong>市场部 <font color="red">  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;总机:400-8855-360</font></strong></font></div> <table class="table table-hover table-bordered"><tbody><tr><td><div align="center"><strong>销售人员</strong></div></td> <td><div align="center"><strong>分 机</strong></div></td> <td><div align="center"><strong>手机号</strong></div></td> <td><div align="center"><strong>邮 箱</strong></div></td></tr> <tr><td><div align="center">王玮</div></td> <td><div align="center">8054</div></td> <td><div align="center">15077865340</div></td> <td><div align="center">wangwei@cstor.cn</div></td></tr> <tr><td><div align="center">叶飞</div></td> <td><div align="center">8050</div></td> <td><div align="center">15651627356</div></td> <td><div align="center">yefei@cstor.cn</div></td></tr> <tr><td><div align="center">骆梦阳</div></td> <td><div align="center">8052</div></td> <td><div align="center">13952028557</div></td> <td><div align="center">luomengyang@cstor.cn</div></td></tr> <tr><td><div align="center">陈跃飞</div></td> <td><div align="center">8041</div></td> <td><div align="center">13951803427</div></td> <td><div align="center">chenyuefei@cstor.cn</div></td></tr> <tr><td><div align="center">杨 &nbsp;剑</div></td> <td><div align="center">8030</div></td> <td><div align="center">18751869256</div></td> <td><div align="center">yangjian@cstor.cn</div></td></tr> <tr><td><div align="center">何家乐</div></td> <td><div align="center">8031</div></td> <td><div align="center">18616794962</div></td> <td><div align="center">hejiale@cstor.cn</div></td></tr> <tr><td><div align="center">刘立宏</div></td> <td><div align="center">8034</div></td> <td><div align="center">13815414773</div></td> <td><div align="center">liulihong@cstor.cn</div></td></tr> <tr><td><div align="center">刘连鹏</div></td> <td><div align="center">8018</div></td> <td><div align="center">18021395113</div></td> <td><div align="center">liulianpeng@cstor.cn</div></td></tr> <tr><td><div align="center">左 &nbsp;赛</div></td> <td><div align="center">8033</div></td> <td><div align="center">18017566211</div></td> <td><div align="center">zuosai@cstor.cn</div></td></tr> <tr><td><div align="center">王 &nbsp;军</div></td> <td><div align="center">8035</div></td> <td><div align="center">13851877991</div></td> <td><div align="center">wangjun2@cstor.cn</div></td></tr> <tr><td><div align="center">张绪文心</div></td> <td><div align="center">8027</div></td> <td><div align="center">18602548008</div></td> <td><div align="center">zhangxuwenxin@cstor.cn</div></td></tr> <tr><td><div align="center">吴亚洲<br>(新疆分公司 总经理)</div></td> <td><div align="center">8022</div></td> <td><div align="center">15051819138</div></td> <td><div align="center">wuyazhou@cstor.cn</div></td></tr> <tr><td><div align="center">刘宏<br>(河南办事处 主任)</div></td> <td><div align="center">&nbsp;</div></td> <td><div align="center">13333831976</div></td> <td><div align="center">liuhong@cstor.cn</div></td></tr> <tr><td><div align="center">韦远雄<br> (广西办事处)</div></td> <td><div align="center">&nbsp;</div></td> <td><div align="center">18577997606</div></td> <td><div align="center">weiyuanxiong@cstor.cn</div></td></tr> <tr><td><div align="center">周俊<br> (湖北办事处)</div></td> <td><div align="center">&nbsp;</div></td> <td><div align="center">13995587166</div></td> <td><div align="center">zhoujun@cstor.cn</div></td></tr> <tr><td><div align="center">汤添智<br> (贵州办事处)</div></td> <td><div align="center"></div></td> <td><div align="center">13602805009</div></td> <td><div align="center">1589819668@qq.com</div></td></tr></tbody></table> <p><img src="http://ds.cstor.cn/img/pdf.png" height="50" width="40"></p> <button @click="downpdf()"  type="button" class="ivu-btn ivu-btn-primary ivu-btn-large"><!----> <!----> <span >下载你的配置单</span></button></div>
+            </p>
+                <p>你也可以联系我们，对你的配置单作详细的解答</p>
+                <div class="pull-left"><font style="font-size: 22px;"><strong>市场部 <font color="red"> &nbsp; &nbsp;
+                    &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;总机:400-8855-360</font></strong></font></div>
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div align="center"><strong>销售人员</strong></div>
+                        </td>
+                        <td>
+                            <div align="center"><strong>分 机</strong></div>
+                        </td>
+                        <td>
+                            <div align="center"><strong>手机号</strong></div>
+                        </td>
+                        <td>
+                            <div align="center"><strong>邮 箱</strong></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">王玮</div>
+                        </td>
+                        <td>
+                            <div align="center">8054</div>
+                        </td>
+                        <td>
+                            <div align="center">15077865340</div>
+                        </td>
+                        <td>
+                            <div align="center">wangwei@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">叶飞</div>
+                        </td>
+                        <td>
+                            <div align="center">8050</div>
+                        </td>
+                        <td>
+                            <div align="center">15651627356</div>
+                        </td>
+                        <td>
+                            <div align="center">yefei@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">骆梦阳</div>
+                        </td>
+                        <td>
+                            <div align="center">8052</div>
+                        </td>
+                        <td>
+                            <div align="center">13952028557</div>
+                        </td>
+                        <td>
+                            <div align="center">luomengyang@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">陈跃飞</div>
+                        </td>
+                        <td>
+                            <div align="center">8041</div>
+                        </td>
+                        <td>
+                            <div align="center">13951803427</div>
+                        </td>
+                        <td>
+                            <div align="center">chenyuefei@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">杨 &nbsp;剑</div>
+                        </td>
+                        <td>
+                            <div align="center">8030</div>
+                        </td>
+                        <td>
+                            <div align="center">18751869256</div>
+                        </td>
+                        <td>
+                            <div align="center">yangjian@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">何家乐</div>
+                        </td>
+                        <td>
+                            <div align="center">8031</div>
+                        </td>
+                        <td>
+                            <div align="center">18616794962</div>
+                        </td>
+                        <td>
+                            <div align="center">hejiale@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">刘立宏</div>
+                        </td>
+                        <td>
+                            <div align="center">8034</div>
+                        </td>
+                        <td>
+                            <div align="center">13815414773</div>
+                        </td>
+                        <td>
+                            <div align="center">liulihong@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">刘连鹏</div>
+                        </td>
+                        <td>
+                            <div align="center">8018</div>
+                        </td>
+                        <td>
+                            <div align="center">18021395113</div>
+                        </td>
+                        <td>
+                            <div align="center">liulianpeng@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">左 &nbsp;赛</div>
+                        </td>
+                        <td>
+                            <div align="center">8033</div>
+                        </td>
+                        <td>
+                            <div align="center">18017566211</div>
+                        </td>
+                        <td>
+                            <div align="center">zuosai@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">王 &nbsp;军</div>
+                        </td>
+                        <td>
+                            <div align="center">8035</div>
+                        </td>
+                        <td>
+                            <div align="center">13851877991</div>
+                        </td>
+                        <td>
+                            <div align="center">wangjun2@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">张绪文心</div>
+                        </td>
+                        <td>
+                            <div align="center">8027</div>
+                        </td>
+                        <td>
+                            <div align="center">18602548008</div>
+                        </td>
+                        <td>
+                            <div align="center">zhangxuwenxin@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">吴亚洲<br>(新疆分公司 总经理)</div>
+                        </td>
+                        <td>
+                            <div align="center">8022</div>
+                        </td>
+                        <td>
+                            <div align="center">15051819138</div>
+                        </td>
+                        <td>
+                            <div align="center">wuyazhou@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">刘宏<br>(河南办事处 主任)</div>
+                        </td>
+                        <td>
+                            <div align="center">&nbsp;</div>
+                        </td>
+                        <td>
+                            <div align="center">13333831976</div>
+                        </td>
+                        <td>
+                            <div align="center">liuhong@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">韦远雄<br> (广西办事处)</div>
+                        </td>
+                        <td>
+                            <div align="center">&nbsp;</div>
+                        </td>
+                        <td>
+                            <div align="center">18577997606</div>
+                        </td>
+                        <td>
+                            <div align="center">weiyuanxiong@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">周俊<br> (湖北办事处)</div>
+                        </td>
+                        <td>
+                            <div align="center">&nbsp;</div>
+                        </td>
+                        <td>
+                            <div align="center">13995587166</div>
+                        </td>
+                        <td>
+                            <div align="center">zhoujun@cstor.cn</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div align="center">汤添智<br> (贵州办事处)</div>
+                        </td>
+                        <td>
+                            <div align="center"></div>
+                        </td>
+                        <td>
+                            <div align="center">13602805009</div>
+                        </td>
+                        <td>
+                            <div align="center">1589819668@qq.com</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p><img src="http://ds.cstor.cn/img/pdf.png" height="50" width="40"></p>
+                <button @click="downpdf()" type="button" class="ivu-btn ivu-btn-primary ivu-btn-large"><!----> <!---->
+                    <span>下载你的配置单</span></button>
+            </div>
             <div slot="footer">
             </div>
         </Modal>
@@ -650,7 +912,7 @@
                         render: (h, params) => {
                             // params.row.submitDate = 1513267200000;
                             return h('div',
-                                Util.nameformit(params.row.id,this.ydata)+'【'+Util.nameformit(params.row.pid,this.ydata)+'】')
+                                Util.nameformit(params.row.id, this.ydata) + '【' + Util.nameformit(params.row.pid, this.ydata) + '】')
                             /*这里的this.row能够获取当前行的数据*/
                         }
                     },
@@ -686,7 +948,7 @@
                 //
                 // });
                 //child数组决定排序
-                for(var item in data){
+                for (var item in data) {
                     this.ydata.push(data[item]);
                     if (data[item].type == 1) {
                         data[item].child.split(',').forEach(value => {
@@ -694,14 +956,15 @@
                         })
                     }
                 }
+                console.log(this.ydata);
                 //按child排序可被选中的数组
-                for (var item in vm.childdata) {
-                    vm.chosenarr[vm.childdata[item]] = data[vm.childdata[item]]
+                for (let i = 0; i < vm.childdata.length; i++) {
+                    vm.chosenarr[vm.childdata[i]] = data[vm.childdata[i]];
                 }
-                // console.log(vm.chosenarr);
+
 
                 var indexArr = data[0].child.split(',');
-                for(let i=0;i<indexArr.length;i++){
+                for (let i = 0; i < indexArr.length; i++) {
                     vm.hData.push(data[indexArr[i]])
                 }
             },
@@ -727,9 +990,9 @@
                     }
                 } else if (num == 1) {
                     this.orbtn = 1;
-                    if(this.quicktypebutton1=='经济型'){
+                    if (this.quicktypebutton1 == '经济型') {
                         this.MesTitle = '经济型快速配置单信息'
-                    }else {
+                    } else {
                         this.MesTitle = '标准型快速配置单信息'
                     }
 
@@ -785,7 +1048,6 @@
             checkChange3(item, index, e) { //单多选
 
                 var ind = e.srcElement.getAttribute("index");
-                console.log(ind);
                 if (ind < 3) {
                     if (!$(e.srcElement).hasClass('active')) {
                         $(e.srcElement).parents('ul').find('a:lt(3)').removeClass('active');
@@ -904,7 +1166,7 @@
                                 goodsInfostr += '26,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';38,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';';
                                 reqData.goodsInfo = goodsInfostr;
                             } else {
-                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';39' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';';
+                                goodsInfostr += '8,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';32,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';11,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';14,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';17,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';19,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';22,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';39,' + this.quickcounts1 + ',' + (this.quickcounts1 * 5).toFixed(2) + ';';
                                 reqData.goodsInfo = goodsInfostr;
                             }
 
